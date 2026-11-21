@@ -35,9 +35,14 @@ async function verifyAccess(request, env) {
   return null;
 }
 
+// ===== CÔNG TẮC BẢO MẬT =====
+// true  = TẮT kiểm tra đăng nhập Cloudflare Access (ai có link cũng xem được)
+// false = BẬT lại kiểm tra đăng nhập (nhớ bật lại Access trong Zero Trust)
+const ACCESS_OFF = true;
+
 export async function onRequestGet({ request, env, waitUntil }) {
-  for (const k of ['APPS_SCRIPT_URL', 'DATA_KEY', 'ACCESS_TEAM', 'ACCESS_AUD']) if (!env[k]) return json({ error: `Thiếu biến môi trường ${k}` }, 500);
-  const denied = await verifyAccess(request, env).catch((e) => 'Lỗi xác thực: ' + e.message);
+  for (const k of ACCESS_OFF ? ['APPS_SCRIPT_URL', 'DATA_KEY'] : ['APPS_SCRIPT_URL', 'DATA_KEY', 'ACCESS_TEAM', 'ACCESS_AUD']) if (!env[k]) return json({ error: `Thiếu biến môi trường ${k}` }, 500);
+  const denied = ACCESS_OFF ? null : await verifyAccess(request, env).catch((e) => 'Lỗi xác thực: ' + e.message);
   if (denied) return json({ error: denied }, 401);
 
   const url = new URL(request.url);
