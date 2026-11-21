@@ -67,7 +67,8 @@ button,input,select{font:inherit;color:inherit}
 .gemorb{width:38px;height:38px;border-radius:50%;flex:none;background:conic-gradient(from 200deg,#f0734f,#e7c94b,#12a46f,#22d3ee,#2f6fe0,#8b6fd6,#f0734f);box-shadow:0 0 16px rgba(62,199,239,.5),inset 0 0 0 3px rgba(255,255,255,.35)}
 .me{display:flex;align-items:center;gap:10px;color:#e9f7fb;font-size:13px;white-space:nowrap}
 .me .av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:12px;color:#fff;background:linear-gradient(145deg,#2f6fe0,#0b97c9);box-shadow:0 4px 10px rgba(0,0,0,.4)}
-.me small{display:block;color:#8fb8c4;font-size:11px}
+.me small{display:block;color:#8fb8c4;font-size:11px;white-space:nowrap}
+#upd{color:#7fe3a8}
 
 /* ---------- main glass panel ---------- */
 .panel{border-radius:var(--r-xl);padding:clamp(16px,2.4vw,30px);background:var(--grain),linear-gradient(165deg,rgba(236,246,249,.30),rgba(220,236,241,.16));backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);border:1px solid rgba(255,255,255,.28);box-shadow:0 30px 60px rgba(0,10,15,.45),inset 0 1px 0 rgba(255,255,255,.4);position:relative;min-width:0}
@@ -1009,8 +1010,10 @@ function downloadCsv() {
   const [name, { cols, rows }] = csvRows();
   const esc = (v) => { v = v == null ? '' : String(v); return /[",\n;]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
   const text = '﻿' + [cols.join(','), ...rows.map((r) => cols.map((c) => esc(r[c])).join(','))].join('\n');
-  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
-  a.download = `hpr-${name}${S.project ? '-' + S.project.toLowerCase().replace(/\s+/g, '-') : ''}${S.month ? '-' + S.month : ''}.csv`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  try { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
+    a.download = `hpr-${name}${S.project ? '-' + S.project.toLowerCase().replace(/\s+/g, '-') : ''}${S.month ? '-' + S.month : ''}.csv`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); } catch (e) {}
+  const btn = $('#csv'), old = btn.textContent;
+  if (navigator.clipboard) navigator.clipboard.writeText(text.slice(1)).then(() => { btn.textContent = '✓ Đã tải / sao chép CSV'; setTimeout(() => (btn.textContent = old), 1800); }).catch(() => {});
 }
 
 // ---------- điều khiển ----------
@@ -1082,7 +1085,7 @@ function prepare(j) {
   S.months = [...new Set([...ads.map((r) => r.month), ...sales.map((r) => r.month)].filter((m) => /^\d{4}-\d{2}$/.test(m)))].sort();
   const sp = d3.rollup(ads, (v) => d3.sum(v, (r) => r.spend), (r) => r.project); [...new Set(sales.map((r) => r.project))].forEach((p) => sp.has(p) || sp.set(p, 0));
   S.projects = [...sp].sort((a, b) => b[1] - a[1]).map((x) => x[0]);
-  $('#upd').textContent = j.updatedAt ? 'cập nhật ' + new Date(j.updatedAt).toLocaleString('vi-VN') : 'dữ liệu từ file';
+  S.updatedAt = j.updatedAt || ''; S.snapshot = !!j.snapshot; tickUpdated();
   if (S.project && !S.projects.includes(S.project)) S.project = '';
   if (S.month && !S.months.includes(S.month)) S.month = '';
   buildKnob(); buildMonths();
@@ -1091,17 +1094,41 @@ const loader = (state, title, msg) => { $('#loader').classList.toggle('hide', st
 async function load(fresh) {
   loader('loading', 'Đang tải dữ liệu', 'Đọc 5 Google Sheet qua /api/data…');
   try {
-    const r = await fetch('/api/data' + (fresh ? '?fresh=1' : ''), { credentials: 'same-origin', cache: 'no-store' });
-    const j = await r.json().catch(() => ({ error: 'HTTP ' + r.status }));
-    if (!r.ok || j.error) throw new Error(j.error || 'HTTP ' + r.status);
+    const get = async (u) => { const r = await fetch(u, { credentials: 'same-origin', cache: 'no-store' }); const j = await r.json().catch(() => ({ error: 'HTTP ' + r.status })); if (!r.ok || j.error) throw new Error(j.error || 'HTTP ' + r.status); return j; };
+    let j;
+    try { j = await get('/api/data' + (fresh ? '?fresh=1' : '')); }
+    catch (e1) { try { j = await get('data.json'); } catch (e2) { throw e1; } }
     prepare(j); loader('done'); render();
   } catch (e) { loader('error', 'Không tải được dữ liệu', `${e.message}. Kiểm tra cấu hình Cloudflare/Apps Script trong README, hoặc mở file JSON để xem thử.`); }
 }
+// ---------- tự làm mới ----------
+function tickUpdated() {
+  const el = $('#upd'); if (!el) return;
+  if (!S.updatedAt) { el.textContent = ''; return; }
+  const t = new Date(S.updatedAt), s = Math.max(0, (Date.now() - t.getTime()) / 1000);
+  const rel = s < 90 ? 'vừa xong' : s < 3600 ? Math.round(s / 60) + ' phút trước' : s < 86400 ? Math.round(s / 3600) + ' giờ trước' : t.toLocaleString('vi-VN');
+  el.textContent = (S.snapshot ? 'bản chụp ' : '● dữ liệu ') + rel + (S.refreshing ? ' · đang cập nhật…' : '');
+  el.title = 'Dữ liệu dựng lúc ' + t.toLocaleString('vi-VN') + '. Trang tự làm mới mỗi 60 giây.';
+}
+async function silentRefresh(fresh) {
+  if (!S.raw || S.refreshing || S.snapshot) return;
+  S.refreshing = true; tickUpdated();
+  try {
+    const r = await fetch('/api/data' + (fresh ? '?fresh=1' : ''), { credentials: 'same-origin', cache: 'no-store' });
+    const j = await r.json();
+    if (r.ok && !j.error && j.updatedAt && j.updatedAt !== S.updatedAt) { prepare(j); render(); }
+  } catch (e) { /* giữ số cũ, thử lại lần sau */ }
+  S.refreshing = false; tickUpdated();
+}
+setInterval(() => { if (document.visibilityState === 'visible') silentRefresh(false); }, 60000);
+setInterval(tickUpdated, 15000);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') silentRefresh(false); });
+
 $('#ld-file').addEventListener('change', async (e) => { const f = e.target.files[0]; if (!f) return; try { prepare(JSON.parse(await f.text())); loader('done'); render(); } catch (err) { loader('error', 'File không hợp lệ', String(err.message)); } });
 
 // ---------- sự kiện ----------
 $$('.nav').forEach((b) => b.addEventListener('click', () => openTab(b.dataset.tab)));
-$('#refresh').onclick = () => load(true);
+$('#refresh').onclick = () => (S.raw ? silentRefresh(true) : load(true));
 $('#reset').onclick = () => setF({ project: '', month: '' });
 $('#csv').onclick = downloadCsv;
 $$('#ov-metric button').forEach((b) => (b.onclick = () => { S.ovMetric = b.dataset.m; $$('#ov-metric button').forEach((x) => x.classList.toggle('on', x === b)); render(); }));
