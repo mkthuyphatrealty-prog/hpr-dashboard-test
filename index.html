@@ -773,7 +773,7 @@ function rCustomer() {
   const stage = (r) => (isCoc(r) ? 'Cọc' : r.status);
   const list = conv.filter((r) => S.cuStage === 'all' || stage(r) === S.cuStage);
   table($('#cu-conv'), [
-    { k: 'date', t: 'Ngày update', f: dmy }, { k: 'name', t: 'Khách hàng' }, { k: 'phone', t: 'Điện thoại' }, { k: 'st', t: 'Tình trạng', v: stage, node: (r) => badge(stage(r), SC[stage(r)] || '#a9b7bd') },
+    { k: 'date', t: 'Ngày update', f: dmy }, { k: 'meet_date', t: 'Ngày gặp / Booking / Cọc', f: (v) => (v ? dmy(v) : '—') }, { k: 'gap', t: 'Sau (ngày)', num: 1, v: (r) => (r.meet_date && r.date ? Math.round((D(r.meet_date) - D(r.date)) / 86400000) : null), f: (v) => (v == null ? '' : v + ' ngày') }, { k: 'name', t: 'Khách hàng' }, { k: 'phone', t: 'Điện thoại' }, { k: 'st', t: 'Tình trạng', v: stage, node: (r) => badge(stage(r), SC[stage(r)] || '#a9b7bd') },
     { k: 'project', t: 'Dự án', node: (r) => badge(r.project, pc(r.project)) }, { k: 'team', t: 'Team' }, { k: 'campaign', t: 'Chiến dịch', v: (r) => r.campaignName || '(không truy được)' }, { k: 'creative', t: 'Mẫu nội dung', v: (r) => r.creative || '—' },
     { k: 'deal_value', t: 'Giá trị', num: 1, f: (v) => (v ? F.full(v) : '') },
   ], list, { sort: 'date' });
