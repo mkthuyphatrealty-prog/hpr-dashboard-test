@@ -433,8 +433,13 @@ const inRange = (d, a, b) => d && (!a || d >= a) && (!b || d <= b);
 function fAds(range = [S.from, S.to], o = {}) {
   return S.raw.ads.filter((r) => inRange(r.date, range[0], range[1]) && (o.noProject || !S.project || r.project === S.project) && (!S.account || r.account === S.account) && (o.noCampaign || !S.campaign || r.campaign_id === S.campaign) && (o.noCreative || !S.creative || r.creative === S.creative));
 }
+// Ngày phát sinh sự kiện: Đã gặp / Booking / Cọc tính theo Ngày gặp khách; nếu chưa nhập thì tạm dùng ngày update
+const evDate = (r) => ((isSql(r) || isConv(r)) && r.meet_date ? r.meet_date : r.date);
+const flagRows = (rows, inD, inE) => rows.map((r) => ({ ...r, _d: inD(r.date), _e: inE(evDate(r)) })).filter((r) => r._d || r._e);
+const byBucket = (sales) => { const m = new Map(); sales.forEach((r) => { const a = bucket(r.date), b = bucket(evDate(r)); if (r._d) (m.get(a) || m.set(a, []).get(a)).push({ ...r, _e: r._e && a === b }); if (r._e && a !== b) (m.get(b) || m.set(b, []).get(b)).push({ ...r, _d: false }); }); return m; };
 function fSales(range = [S.from, S.to], o = {}) {
-  return S.raw.sales.filter((r) => inRange(r.date, range[0], range[1]) && (o.noProject || !S.project || r.project === S.project) && (!S.account || r.account === S.account) && (!S.team || r.team === S.team) && (!S.channel || r.channel === S.channel) && (o.noCampaign || !S.campaign || r.campaign_id === S.campaign) && (o.noCreative || !S.creative || r.creative === S.creative));
+  const inR = (d) => !!inRange(d, range[0], range[1]);
+  return flagRows(S.raw.sales.filter((r) => (o.noProject || !S.project || r.project === S.project) && (!S.account || r.account === S.account) && (!S.team || r.team === S.team) && (!S.channel || r.channel === S.channel) && (o.noCampaign || !S.campaign || r.campaign_id === S.campaign) && (o.noCreative || !S.creative || r.creative === S.creative)), inR, inR);
 }
 function fCust(range = [S.from, S.to]) {
   return S.raw.customers.filter((r) => inRange(r.created, range[0], range[1]) && (!S.project || r.project === S.project) && (!S.account || r.account === S.account) && (!S.team || r.team === S.team) && (!S.channel || r.channel === S.channel) && (!S.campaign || r.campaign_id === S.campaign) && (!S.creative || r.creative === S.creative));
@@ -443,8 +448,9 @@ function fCust(range = [S.from, S.to]) {
 // ===== Tính chỉ số =====
 function stats(ads, sales) {
   const spend = sum(ads, 'spend'), leads = sum(ads, 'leads'), lc = sum(ads, 'link_clicks'), imp = sum(ads, 'impressions');
-  const mql = sales.filter(isMql).length, sql = sales.filter(isSql).length, book = sales.filter(isBook).length, coc = sales.filter(isCoc).length, conv = book + coc, revenue = sum(sales, 'deal_value');
-  return { spend, leads, lc, imp, data: sales.length, mql, sql, book, coc, conv, revenue, cpl: div(spend, leads), cpmql: div(spend, mql), cpsql: div(spend, sql), cpconv: div(spend, conv), qRate: div(mql, leads), formRate: div(leads, lc), ctr: div(lc, imp), mqlRate: div(mql, sales.length) };
+  const D_ = sales.filter((r) => r._d !== false), E_ = sales.filter((r) => r._e !== false);
+  const mql = D_.filter(isMql).length, sql = E_.filter(isSql).length, book = E_.filter(isBook).length, coc = E_.filter(isCoc).length, conv = book + coc, revenue = sum(E_, 'deal_value');
+  return { spend, leads, lc, imp, data: D_.length, mql, sql, book, coc, conv, revenue, cpl: div(spend, leads), cpmql: div(spend, mql), cpsql: div(spend, sql), cpconv: div(spend, conv), qRate: div(mql, leads), formRate: div(leads, lc), ctr: div(lc, imp), mqlRate: div(mql, D_.length) };
 }
 const cur = () => stats(fAds(), fSales());
 const prev = () => { const p = prevRange(); return p ? stats(fAds(p), fSales(p)) : null; };
@@ -666,7 +672,7 @@ function rOverview() {
   ], projs, { sort: 'spend' });
 }
 function periodSeries() {
-  const ads = fAds(), sales = fSales(), ba = groupBy(ads, (r) => bucket(r.date)), bs = groupBy(sales, (r) => bucket(r.date));
+  const ads = fAds(), sales = fSales(), ba = groupBy(ads, (r) => bucket(r.date)), bs = byBucket(sales);
   return [...new Set([...ba.keys(), ...bs.keys()])].sort().map((b) => ({ b, ...stats(ba.get(b) || [], bs.get(b) || []) }));
 }
 function funnel(el, st, firstNote) {
@@ -703,8 +709,8 @@ function rCampaign() {
   // Bảng nhiệt chiến dịch × kỳ
   const top = rows.slice().sort((a, b) => b.spend - a.spend).slice(0, 10), ads = fAds(), sales = fSales();
   const periods = [...new Set(ads.map((r) => bucket(r.date)))].sort().slice(-10);
-  const cellStats = new Map();
-  top.forEach((c) => periods.forEach((b) => cellStats.set(c.key + '|' + b, stats(ads.filter((r) => r.campaign_id === c.key && bucket(r.date) === b), sales.filter((r) => r.campaign_id === c.key && bucket(r.date) === b)))));
+  const cellStats = new Map(), byB = byBucket(sales);
+  top.forEach((c) => periods.forEach((b) => cellStats.set(c.key + '|' + b, stats(ads.filter((r) => r.campaign_id === c.key && bucket(r.date) === b), (byB.get(b) || []).filter((r) => r.campaign_id === c.key)))));
   heat($('#cp-heat'), top, periods, (c, b) => { const s = cellStats.get(c.key + '|' + b); if (!s || !s.spend) return null;
     if (!s.mql) return { text: '0 MQL', color: '#f6c3cb', tip: [`Chi phí: ${F.full(s.spend)}`, 'Chưa có MQL'] };
     const t = 1 - Math.min(2, s.cpmql / avg) / 2; return { text: F.vnd(s.cpmql), color: goodBad(t), tip: [`Chi phí/MQL: ${F.full(s.cpmql)}`, `Chi phí: ${F.full(s.spend)} · MQL ${F.int(s.mql)}`] }; },
@@ -764,7 +770,7 @@ function rTime() {
 
 // ===== 5. KHÁCH HÀNG =====
 function rCustomer() {
-  const s = fSales(), conv = s.filter((r) => isSql(r) || isConv(r));
+  const s = fSales(), conv = s.filter((r) => r._e && (isSql(r) || isConv(r)));
   const c = cur();
   tiles($('#cu-tiles'), [
     { l: 'Khách điền form', v: F.int(fCust().length), g: 'g-c', i: '✎' }, { l: 'MQL', v: F.int(c.mql), g: 'g-s', i: '♥' }, { l: 'Đã gặp', v: F.int(c.sql), g: 'g-a', i: '◉' },
@@ -858,14 +864,14 @@ const GROUPS = [['Booking + Cọc', (r) => isConv(r), '#0b7a51'], ['Đã gặp',
 const grp = (r) => GROUPS.find((g) => g[1](r))[0];
 function rTeam() {
   const s = fSales(), all = stats([], s);
-  const T = [...groupBy(s, 'team')].map(([team, rows]) => ({ team, rows, ...stats([], rows), data: rows.length })).sort((a, b) => b.data - a.data);
+  const T = [...groupBy(s, 'team')].map(([team, rows]) => ({ team, rows: rows.filter((r) => r._d), ...stats([], rows) })).sort((a, b) => b.data - a.data);
   const avgRate = all.mqlRate || 0;
   table($('#tm-table'), [
-    { k: 'team', t: 'Team' }, { k: 'data', t: 'Data nhận', num: 1, f: F.int, tot: () => F.int(s.length) },
+    { k: 'team', t: 'Team' }, { k: 'data', t: 'Data nhận', num: 1, f: F.int, tot: () => F.int(all.data) },
     { k: 'mql', t: 'MQL', num: 1, f: F.int, tot: () => F.int(all.mql) }, { k: 'mqlRate', t: 'Tỷ lệ MQL', num: 1, node: (r) => heatSpan(F.pct(r.mqlRate), avgRate ? Math.min(1, r.mqlRate / avgRate / 2) : null), tot: () => F.pct(all.mqlRate) },
-    { k: 'sql', t: 'Đã gặp', num: 1, f: F.int, tot: () => F.int(all.sql) }, { k: 'sqlRate', t: 'Tỷ lệ gặp', num: 1, v: (r) => div(r.sql, r.data), f: (v) => F.pct(v), tot: () => F.pct(div(all.sql, s.length)) },
+    { k: 'sql', t: 'Đã gặp', num: 1, f: F.int, tot: () => F.int(all.sql) }, { k: 'sqlRate', t: 'Tỷ lệ gặp', num: 1, v: (r) => div(r.sql, r.data), f: (v) => F.pct(v), tot: () => F.pct(div(all.sql, all.data)) },
     { k: 'book', t: 'Booking', num: 1, f: F.int, tot: () => F.int(all.book) }, { k: 'coc', t: 'Cọc', num: 1, f: F.int, tot: () => F.int(all.coc) },
-    { k: 'convRate', t: 'Tỷ lệ chuyển đổi', num: 1, v: (r) => div(r.conv, r.data), f: (v) => F.pct(v, 2), tot: () => F.pct(div(all.conv, s.length), 2) }, { k: 'revenue', t: 'Doanh số', num: 1, f: F.full, tot: () => F.full(all.revenue) },
+    { k: 'convRate', t: 'Tỷ lệ chuyển đổi', num: 1, v: (r) => div(r.conv, r.data), f: (v) => F.pct(v, 2), tot: () => F.pct(div(all.conv, all.data), 2) }, { k: 'revenue', t: 'Doanh số', num: 1, f: F.full, tot: () => F.full(all.revenue) },
   ], T, { sort: 'data', total: {} });
   // Cột chồng 100%
   const el = $('#tm-stack');
@@ -886,7 +892,7 @@ function rTeam() {
 
 // ===== 7. CHẤT LƯỢNG DỮ LIỆU =====
 function rHealth() {
-  const s = fSales(), n = s.length || 1, c = fCust();
+  const s = fSales().filter((r) => r._d), n = s.length || 1, c = fCust();
   const checks = [
     ['Khách hẹn/đã gặp có Ngày gặp khách', (() => { const t = s.filter((r) => r.status === 'Hẹn gặp' || isMetR(r)); return t.length ? t.filter((r) => r.meet_date).length / t.length : 1; })(), `${F.int(s.filter((r) => (r.status === 'Hẹn gặp' || isMetR(r)) && !r.meet_date).length)} khách Hẹn gặp/Đã gặp/Booking/Cọc chưa điền ngày gặp`],
     ['Data có campaign_id (truy được chiến dịch)', 1 - s.filter((r) => !r.campaign_id).length / n, `${F.int(s.filter((r) => !r.campaign_id).length)} dòng không truy được nguồn`],
