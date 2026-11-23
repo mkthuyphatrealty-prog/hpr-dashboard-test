@@ -216,6 +216,8 @@ td.lnk{color:#0b6f96;cursor:pointer;text-decoration:underline dotted}
 
 .simnote{background:#fff5d6;border:1px solid #f2c94c;color:#6b4e00;border-radius:14px;padding:10px 14px;font-size:12.5px;margin-bottom:14px}
 
+th .eye{margin-left:8px;padding:2px 9px;border-radius:999px;border:1px solid rgba(15,44,55,.18);background:#fff;color:#0b6f96;font-family:inherit;font-size:10.5px;font-weight:600;line-height:1.6;letter-spacing:0;text-transform:none;cursor:pointer;vertical-align:middle}th .eye:hover{background:#e6f6fb}th .eye.on{background:#0b6f96;color:#fff;border-color:#0b6f96}
+
 #loader{position:fixed;inset:0;z-index:99;display:grid;place-items:center;background:rgba(6,34,44,.55);backdrop-filter:blur(6px)}#loader .box{background:#f4f6f3;border-radius:20px;padding:26px 30px;max-width:420px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}.hide{display:none!important}.spin{width:34px;height:34px;border-radius:50%;border:4px solid #cfe6ee;border-top-color:#22a6d6;margin:0 auto 12px;animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
 </style></head><body><div class="app">
   <aside class="side leather" aria-label="Điều hướng">
@@ -417,7 +419,10 @@ const SC = { 'Cọc': '#0b7a51', 'Booking': '#12a46f', 'Đã gặp': '#2fbf86', 
 const WD = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
 
 // ===== Trạng thái =====
-const S = { raw: null, tab: 'overview', from: '', to: '', gran: 'month', account: '', project: '', team: '', channel: '', campaign: '', creative: '', ovMetric: 'spend', ctMetric: 'mql', tmMetric: 'n', tmCmp: 'data', cuStage: 'all', mtList: 'over', cuPage: 0, sorts: {} };
+const S = { raw: null, tab: 'overview', from: '', to: '', gran: 'month', account: '', project: '', team: '', channel: '', campaign: '', creative: '', ovMetric: 'spend', ctMetric: 'mql', tmMetric: 'n', tmCmp: 'data', cuStage: 'all', mtList: 'over', cuPage: 0, sorts: {}, showPhone: false };
+// Ẩn / hiện số điện thoại (mặc định ẩn, chỉ giữ 3 số cuối)
+const phoneF = (v) => { const t = String(v ?? ''); return S.showPhone || t.length < 4 ? t : '•••••••' + t.slice(-3); };
+const PHONE = { k: 'phone', t: 'Điện thoại', phone: 1, f: phoneF };
 
 // ===== Thời gian =====
 const D = (s) => new Date(s + 'T00:00:00Z');
@@ -560,7 +565,8 @@ function table(el, cols, rows, o = {}) {
   const sorted = rows.slice().sort((a, b) => { const va = val(a), vb = val(b); if (typeof va === 'number' || typeof vb === 'number') return st.d * ((va ?? -Infinity) - (vb ?? -Infinity)); return st.d * String(va ?? '').localeCompare(String(vb ?? ''), 'vi'); });
   const view = o.limit ? sorted.slice(0, o.limit) : sorted;
   const t = document.createElement('table'), th = t.createTHead().insertRow();
-  cols.forEach((col) => { const h = document.createElement('th'); h.textContent = col.t; if (col.num) h.className = 'num'; if (col.k === st.k) { const a = document.createElement('span'); a.className = 'ar'; a.textContent = st.d > 0 ? '▲' : '▼'; h.append(a); }
+  cols.forEach((col) => { const h = document.createElement('th'); h.textContent = col.t;
+    if (col.phone) { const e = document.createElement('button'); e.type = 'button'; e.className = 'eye' + (S.showPhone ? ' on' : ''); e.textContent = S.showPhone ? 'Ẩn' : 'Hiện'; e.title = S.showPhone ? 'Ẩn số điện thoại' : 'Hiện số điện thoại'; e.onclick = (ev) => { ev.stopPropagation(); S.showPhone = !S.showPhone; render(); }; h.append(e); } if (col.num) h.className = 'num'; if (col.k === st.k) { const a = document.createElement('span'); a.className = 'ar'; a.textContent = st.d > 0 ? '▲' : '▼'; h.append(a); }
     h.onclick = () => { S.sorts[el.id] = { k: col.k, d: col.k === st.k ? -st.d : (col.num ? -1 : 1) }; table(el, cols, rows, o); }; th.append(h); });
   const tb = t.createTBody();
   view.forEach((r) => { const tr = tb.insertRow(); cols.forEach((col) => { const td = tr.insertCell(); if (col.num) td.className = 'num'; const v = col.v ? col.v(r) : r[col.k];
@@ -779,7 +785,7 @@ function rCustomer() {
   const stage = (r) => (isCoc(r) ? 'Cọc' : r.status);
   const list = conv.filter((r) => S.cuStage === 'all' || stage(r) === S.cuStage);
   table($('#cu-conv'), [
-    { k: 'date', t: 'Ngày update', f: dmy }, { k: 'meet_date', t: 'Ngày gặp / Booking / Cọc', f: (v) => (v ? dmy(v) : '—') }, { k: 'gap', t: 'Sau (ngày)', num: 1, v: (r) => (r.meet_date && r.date ? Math.round((D(r.meet_date) - D(r.date)) / 86400000) : null), f: (v) => (v == null ? '' : v + ' ngày') }, { k: 'name', t: 'Khách hàng' }, { k: 'phone', t: 'Điện thoại' }, { k: 'st', t: 'Tình trạng', v: stage, node: (r) => badge(stage(r), SC[stage(r)] || '#a9b7bd') },
+    { k: 'date', t: 'Ngày update', f: dmy }, { k: 'meet_date', t: 'Ngày gặp / Booking / Cọc', f: (v) => (v ? dmy(v) : '—') }, { k: 'gap', t: 'Sau (ngày)', num: 1, v: (r) => (r.meet_date && r.date ? Math.round((D(r.meet_date) - D(r.date)) / 86400000) : null), f: (v) => (v == null ? '' : v + ' ngày') }, { k: 'name', t: 'Khách hàng' }, PHONE, { k: 'st', t: 'Tình trạng', v: stage, node: (r) => badge(stage(r), SC[stage(r)] || '#a9b7bd') },
     { k: 'project', t: 'Dự án', node: (r) => badge(r.project, pc(r.project)) }, { k: 'team', t: 'Team' }, { k: 'campaign', t: 'Chiến dịch', v: (r) => r.campaignName || '(không truy được)' }, { k: 'creative', t: 'Mẫu nội dung', v: (r) => r.creative || '—' },
     { k: 'deal_value', t: 'Giá trị', num: 1, f: (v) => (v ? F.full(v) : '') },
   ], list, { sort: 'date' });
@@ -789,7 +795,7 @@ function rCustomer() {
   const pages = Math.max(1, Math.ceil(rows.length / 50)); S.cuPage = Math.min(S.cuPage, pages - 1);
   $('#cu-count').textContent = F.int(rows.length) + ' khách'; $('#cu-page').textContent = `Trang ${S.cuPage + 1} / ${pages}`;
   table($('#cu-table'), [
-    { k: 'created', t: 'Ngày điền', f: (v, r) => dmy(v) + ' ' + r.time }, { k: 'name', t: 'Họ tên' }, { k: 'phone', t: 'Điện thoại' }, { k: 'project', t: 'Dự án', node: (r) => badge(r.project, pc(r.project)) },
+    { k: 'created', t: 'Ngày điền', f: (v, r) => dmy(v) + ' ' + r.time }, { k: 'name', t: 'Họ tên' }, PHONE, { k: 'project', t: 'Dự án', node: (r) => badge(r.project, pc(r.project)) },
     { k: 'bedroom', t: 'Loại căn' }, { k: 'purpose', t: 'Mục đích' }, { k: 'channel', t: 'Kênh' }, { k: 'campaign', t: 'Chiến dịch' }, { k: 'creative', t: 'Mẫu nội dung' },
     { k: 'status', t: 'Tình trạng', node: (r) => badge(r.status, SC[r.status] || '#a9b7bd') }, { k: 'team', t: 'Team' },
   ], rows.slice(S.cuPage * 50, S.cuPage * 50 + 50), { sort: 'created' });
@@ -855,7 +861,7 @@ function rMeet() {
   $('#mt-list-sub').textContent = over ? `${list.length} khách đã qua ngày hẹn nhưng chưa chuyển sang "Đã gặp". Sale cần gọi lại hoặc cập nhật.` : `${list.length} lịch hẹn từ hôm nay trở đi`;
   table($('#mt-list'), [
     { k: 'meet_date', t: 'Ngày hẹn', f: dmy }, { k: 'lag', t: over ? 'Quá hạn' : 'Còn', num: 1, v: (r) => Math.abs(Math.round((D(r.meet_date) - D(S.today)) / 86400000)), f: (v) => v + ' ngày' },
-    { k: 'name', t: 'Khách hàng' }, { k: 'phone', t: 'Điện thoại' }, { k: 'team', t: 'Team' }, { k: 'project', t: 'Dự án', node: (r) => badge(r.project, pc(r.project)) }, { k: 'status', t: 'Tình trạng', node: (r) => badge(r.status, SC[r.status] || '#a9b7bd') },
+    { k: 'name', t: 'Khách hàng' }, PHONE, { k: 'team', t: 'Team' }, { k: 'project', t: 'Dự án', node: (r) => badge(r.project, pc(r.project)) }, { k: 'status', t: 'Tình trạng', node: (r) => badge(r.status, SC[r.status] || '#a9b7bd') },
   ], list, { sort: 'meet_date', dir: over ? 1 : 1 });
 }
 
