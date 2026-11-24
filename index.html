@@ -332,8 +332,8 @@ th .eye{margin-left:8px;padding:2px 9px;border-radius:999px;border:1px solid rgb
       <!-- 5. KHÁCH HÀNG -->
       <section class="page" id="p-customer">
         <div class="tiles t5" id="cu-tiles"></div>
-        <div class="card"><div class="ch"><div><h3>Khách đã gặp, Booking, Cọc</h3><p class="sub">Kèm chiến dịch và mẫu nội dung mang khách về</p></div>
-          <div class="seg light" id="cu-stage"><button data-s="all" class="on">Tất cả</button><button data-s="Đã gặp">Đã gặp (chưa chốt)</button><button data-s="Booking">Booking</button><button data-s="Cọc">Cọc</button></div></div>
+        <div class="card"><div class="ch"><div><h3>Khách hẹn gặp, đã gặp, Booking, Cọc</h3><p class="sub">Kèm chiến dịch và mẫu nội dung mang khách về</p></div>
+          <div class="seg light" id="cu-stage"><button data-s="all" class="on">Tất cả</button><button data-s="Hẹn gặp">Hẹn gặp (chưa gặp)</button><button data-s="Đã gặp">Đã gặp (chưa chốt)</button><button data-s="Booking">Booking</button><button data-s="Cọc">Cọc</button></div></div>
           <div class="tw" id="cu-conv"></div></div>
         <div class="card"><div class="ch"><div><h3>Tất cả khách điền form</h3><p class="sub">Tình trạng và team lấy từ sheet sale</p></div><span class="chip" id="cu-count">—</span></div>
           <div class="tools"><input id="cu-q" type="search" placeholder="Tìm tên, chiến dịch, nội dung…"><select id="cu-status"></select></div>
@@ -790,9 +790,15 @@ function rCustomer() {
     { l: 'Booking', v: F.int(c.book), g: 'g-o', i: '★' }, { l: 'Cọc', v: F.int(c.coc), g: 'g-e', i: '✓', s: F.vnd(c.revenue) },
   ]);
   const stage = (r) => (isCoc(r) ? 'Cọc' : r.status);
-  const list = conv.filter((r) => S.cuStage === 'all' || stage(r) === S.cuStage);
+  // Khách hẹn gặp nhưng chưa gặp: ngày update hoặc ngày hẹn nằm trong kỳ đang lọc
+  const inK = (d) => !!d && d >= S.from && d <= S.to;
+  const hen = fSales(['', '']).filter((r) => r.status === 'Hẹn gặp' && !r.deals && (inK(r.date) || inK(r.meet_date)));
+  const all = [...hen, ...conv], cnt = (k) => (k === 'all' ? all.length : all.filter((r) => stage(r) === k).length);
+  $$('#cu-stage button').forEach((b) => { b.dataset.l = b.dataset.l || b.textContent; b.textContent = `${b.dataset.l} · ${cnt(b.dataset.s)}`; });
+  const list = all.filter((r) => S.cuStage === 'all' || stage(r) === S.cuStage);
+  const overdue = (r) => r.status === 'Hẹn gặp' && r.meet_date && r.meet_date < S.today;
   table($('#cu-conv'), [
-    { k: 'date', t: 'Ngày update', f: dmy }, { k: 'meet_date', t: 'Ngày gặp / Booking / Cọc', f: (v) => (v ? dmy(v) : '—') }, { k: 'gap', t: 'Sau (ngày)', num: 1, v: (r) => (r.meet_date && r.date ? Math.round((D(r.meet_date) - D(r.date)) / 86400000) : null), f: (v) => (v == null ? '' : v + ' ngày') }, { k: 'name', t: 'Khách hàng' }, PHONE, { k: 'st', t: 'Tình trạng', v: stage, node: (r) => badge(stage(r), SC[stage(r)] || '#a9b7bd') },
+    { k: 'date', t: 'Ngày update', f: dmy }, { k: 'meet_date', t: 'Ngày hẹn / gặp / Booking / Cọc', f: (v, r) => (v ? dmy(v) + (overdue(r) ? ' · quá hạn' : '') : r.status === 'Hẹn gặp' ? 'chưa có ngày hẹn' : '—') }, { k: 'gap', t: 'Sau (ngày)', num: 1, v: (r) => (r.meet_date && r.date ? Math.round((D(r.meet_date) - D(r.date)) / 86400000) : null), f: (v) => (v == null ? '' : v + ' ngày') }, { k: 'name', t: 'Khách hàng' }, PHONE, { k: 'st', t: 'Tình trạng', v: stage, node: (r) => badge(stage(r), SC[stage(r)] || '#a9b7bd') },
     { k: 'project', t: 'Dự án', node: (r) => badge(r.project, pc(r.project)) }, { k: 'team', t: 'Team' }, { k: 'campaign', t: 'Chiến dịch', v: (r) => r.campaignName || '(không truy được)' }, { k: 'creative', t: 'Mẫu nội dung', v: (r) => r.creative || '—' },
     { k: 'deal_value', t: 'Giá trị', num: 1, f: (v) => (v ? F.full(v) : '') },
   ], list, { sort: 'date' });
