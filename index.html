@@ -202,8 +202,16 @@ tbody tr:hover td{background:rgba(255,255,255,.75)}
 .hero .hv{font-family:var(--serif);font-size:clamp(28px,3vw,40px);line-height:1.05;margin:10px 0 4px;white-space:nowrap}
 .hero .hl{font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
 .hero .hs{font-size:11.5px;color:var(--muted);margin-top:6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.hero .card.prime{background:linear-gradient(160deg,#0f3a48,#0a2730);color:#e9f7fb;border-color:rgba(160,230,250,.25)}
-.hero .card.prime .hs{color:#a8cbd5}
+.hero .card.prime{position:relative;overflow:hidden;color:#fff;border:1px solid rgba(255,255,255,.35);background:linear-gradient(135deg,#2ee0c0 0%,#14b8a6 42%,#0e8fa3 100%);box-shadow:0 14px 34px rgba(16,170,160,.35),inset 0 1px 0 rgba(255,255,255,.45)}
+.hero .card.prime+.card.prime{background:linear-gradient(135deg,#3be6b0 0%,#12b886 42%,#0b8f87 100%);box-shadow:0 14px 34px rgba(18,184,134,.33),inset 0 1px 0 rgba(255,255,255,.45)}
+.hero .card.prime::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 0% 0%,rgba(255,255,255,.35),transparent 55%),radial-gradient(80% 80% at 100% 100%,rgba(6,60,70,.25),transparent 60%);pointer-events:none}
+.hero .card.prime>*{position:relative}
+.hero .card.prime .hv{text-shadow:0 2px 12px rgba(4,60,66,.25)}
+.hero .card.prime .hl{color:#fff}
+.hero .card.prime .hl .ic{background:rgba(255,255,255,.25)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.45)}
+.hero .card.prime .hs{color:rgba(255,255,255,.9)}
+.hero .card.prime .delta{background:rgba(255,255,255,.92)}
+.hero .card.prime .delta.good{color:#0b7a51}.hero .card.prime .delta.bad{color:#c4233c}.hero .card.prime .delta.neu{color:#2c4a55}
 .t5{grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))}
 .tile .v{font-size:clamp(20px,1.9vw,26px)}
 .dec{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap}
@@ -217,6 +225,7 @@ td.lnk{color:#0b6f96;cursor:pointer;text-decoration:underline dotted}
 .simnote{background:#fff5d6;border:1px solid #f2c94c;color:#6b4e00;border-radius:14px;padding:10px 14px;font-size:12.5px;margin-bottom:14px}
 
 th .eye{margin-left:8px;padding:2px 9px;border-radius:999px;border:1px solid rgba(15,44,55,.18);background:#fff;color:#0b6f96;font-family:inherit;font-size:10.5px;font-weight:600;line-height:1.6;letter-spacing:0;text-transform:none;cursor:pointer;vertical-align:middle}th .eye:hover{background:#e6f6fb}th .eye.on{background:#0b6f96;color:#fff;border-color:#0b6f96}
+.seg.wrap{flex-wrap:wrap;row-gap:4px}
 
 #loader{position:fixed;inset:0;z-index:99;display:grid;place-items:center;background:rgba(6,34,44,.55);backdrop-filter:blur(6px)}#loader .box{background:#f4f6f3;border-radius:20px;padding:26px 30px;max-width:420px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}.hide{display:none!important}.spin{width:34px;height:34px;border-radius:50%;border:4px solid #cfe6ee;border-top-color:#22a6d6;margin:0 auto 12px;animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
 </style></head><body><div class="app">
@@ -254,7 +263,7 @@ th .eye{margin-left:8px;padding:2px 9px;border-radius:999px;border:1px solid rgb
       <section class="filters card" id="filters" aria-label="Bộ lọc">
         <div class="frow">
           <div class="fgroup"><span class="lbl">Thời gian</span>
-            <div class="seg" id="preset"><button data-p="7d">7 ngày</button><button data-p="week">Tuần này</button><button data-p="month">Tháng này</button><button data-p="lastmonth">Tháng trước</button><button data-p="all">Toàn bộ</button></div></div>
+            <div class="seg wrap" id="preset"><button data-p="today">Hôm nay</button><button data-p="yesterday">Hôm qua</button><button data-p="7d">7 ngày qua</button><button data-p="30d">30 ngày qua</button><button data-p="week">Tuần này</button><button data-p="lastweek">Tuần trước</button><button data-p="month">Tháng này</button><button data-p="lastmonth">Tháng trước</button><button data-p="all">Toàn bộ</button></div></div>
           <div class="fgroup"><span class="lbl">Từ ngày – đến ngày</span>
             <div class="dates"><input type="date" id="from" aria-label="Từ ngày"><span>→</span><input type="date" id="to" aria-label="Đến ngày"></div></div>
         </div>
@@ -328,7 +337,7 @@ th .eye{margin-left:8px;padding:2px 9px;border-radius:999px;border:1px solid rgb
       <section class="page" id="p-customer">
         <div class="tiles t5" id="cu-tiles"></div>
         <div class="card"><div class="ch"><div><h3>Khách đã gặp, Booking, Cọc</h3><p class="sub">Kèm chiến dịch và mẫu nội dung mang khách về</p></div>
-          <div class="seg light" id="cu-stage"><button data-s="all" class="on">Tất cả</button><button data-s="Đã gặp">Đã gặp</button><button data-s="Booking">Booking</button><button data-s="Cọc">Cọc</button></div></div>
+          <div class="seg light" id="cu-stage"><button data-s="all" class="on">Tất cả</button><button data-s="Đã gặp">Đã gặp (chưa chốt)</button><button data-s="Booking">Booking</button><button data-s="Cọc">Cọc</button></div></div>
           <div class="tw" id="cu-conv"></div></div>
         <div class="card"><div class="ch"><div><h3>Tất cả khách điền form</h3><p class="sub">Tình trạng và team lấy từ sheet sale</p></div><span class="chip" id="cu-count">—</span></div>
           <div class="tools"><input id="cu-q" type="search" placeholder="Tìm tên, chiến dịch, nội dung…"><select id="cu-status"></select></div>
@@ -372,7 +381,7 @@ th .eye{margin-left:8px;padding:2px 9px;border-radius:999px;border:1px solid rgb
         <ul>
           <li><b>Lead</b>: số lead Meta Ads báo cáo.</li>
           <li><b>MQL (Qualified)</b>: data sale ở tình trạng Chăm sóc, Tiềm năng, Hẹn gặp, Đã gặp, Booking hoặc Cọc.</li>
-          <li><b>SQL</b>: data sale ở tình trạng Đã gặp.</li>
+          <li><b>Đã gặp</b>: tổng khách đã gặp thực tế, gồm khách đang ở tình trạng Đã gặp, Booking hoặc Cọc (khách Booking/Cọc chắc chắn đã gặp). Chi phí / lần gặp = chi phí ÷ tổng khách đã gặp.</li>
           <li><b>Chuyển đổi</b>: Booking + Cọc. <b>Chi phí/chuyển đổi</b> = Chi phí ÷ (Booking + Cọc).</li>
           <li><b>Tỷ lệ qualified</b> = MQL ÷ Lead × 100%. <b>Tỷ lệ điền form</b> = Lead ÷ Nhấn link × 100%.</li>
           <li><b>Doanh số</b>: cột "Giá trị giao dịch (Sau CK & VAT)".</li>
@@ -431,7 +440,9 @@ const addDays = (s, n) => iso(new Date(D(s).getTime() + n * 86400000));
 const weekStart = (s) => { const d = D(s); const wd = (d.getUTCDay() + 6) % 7; return addDays(s, -wd); };
 const bucket = (s) => (S.gran === 'day' ? s : S.gran === 'week' ? weekStart(s) : s.slice(0, 7));
 const bucketLabel = (b) => (S.gran === 'month' ? 'T' + Number(b.slice(5, 7)) + '/' + b.slice(2, 4) : S.gran === 'week' ? 'Tuần ' + b.slice(8, 10) + '/' + b.slice(5, 7) : b.slice(8, 10) + '/' + b.slice(5, 7));
-function prevRange() { if (!S.from || !S.to) return null; const n = Math.round((D(S.to) - D(S.from)) / 86400000) + 1; return [addDays(S.from, -n), addDays(S.from, -1)]; }
+function prevRange() { if (!S.from || !S.to) return null;
+  if (S.preset === 'week') return [addDays(S.from, -7), addDays(S.to, -7)];
+  if (S.preset === 'month' || S.preset === 'lastmonth') { const p0 = addDays(S.from, -1).slice(0, 8) + '01', len = Math.round((D(S.to) - D(S.from)) / 86400000); const e = addDays(p0, len), pe = addDays(S.from, -1); return [p0, e < pe ? e : pe]; } const n = Math.round((D(S.to) - D(S.from)) / 86400000) + 1; return [addDays(S.from, -n), addDays(S.from, -1)]; }
 
 // ===== Lọc =====
 const inRange = (d, a, b) => d && (!a || d >= a) && (!b || d <= b);
@@ -454,8 +465,8 @@ function fCust(range = [S.from, S.to]) {
 function stats(ads, sales) {
   const spend = sum(ads, 'spend'), leads = sum(ads, 'leads'), lc = sum(ads, 'link_clicks'), imp = sum(ads, 'impressions');
   const D_ = sales.filter((r) => r._d !== false), E_ = sales.filter((r) => r._e !== false);
-  const mql = D_.filter(isMql).length, sql = E_.filter(isSql).length, book = E_.filter(isBook).length, coc = E_.filter(isCoc).length, conv = book + coc, revenue = sum(E_, 'deal_value');
-  return { spend, leads, lc, imp, data: D_.length, mql, sql, book, coc, conv, revenue, cpl: div(spend, leads), cpmql: div(spend, mql), cpsql: div(spend, sql), cpconv: div(spend, conv), qRate: div(mql, leads), formRate: div(leads, lc), ctr: div(lc, imp), mqlRate: div(mql, D_.length) };
+  const mql = D_.filter(isMql).length, sql = E_.filter((r) => isSql(r) || isConv(r)).length, wait = E_.filter(isSql).length, book = E_.filter(isBook).length, coc = E_.filter(isCoc).length, conv = book + coc, revenue = sum(E_, 'deal_value');
+  return { spend, leads, lc, imp, data: D_.length, mql, sql, wait, book, coc, conv, revenue, cpl: div(spend, leads), cpmql: div(spend, mql), cpsql: div(spend, sql), cpconv: div(spend, conv), qRate: div(mql, leads), formRate: div(leads, lc), ctr: div(lc, imp), mqlRate: div(mql, D_.length) };
 }
 const cur = () => stats(fAds(), fSales());
 const prev = () => { const p = prevRange(); return p ? stats(fAds(p), fSales(p)) : null; };
@@ -636,7 +647,7 @@ function rOverview() {
     { l: 'Doanh số', v: F.vnd(c.revenue), d: delta(c, p, 'revenue'), g: 'g-r', i: '◆', prime: true, s: 'sau CK & VAT' },
     { l: 'Khách Cọc', v: F.int(c.coc), d: delta(c, p, 'coc'), g: 'g-e', i: '✓' },
     { l: 'Booking', v: F.int(c.book), d: delta(c, p, 'book'), g: 'g-o', i: '★' },
-    { l: 'Khách đã gặp (SQL)', v: F.int(c.sql), d: delta(c, p, 'sql'), g: 'g-a', i: '◉' },
+    { l: 'Đã gặp (gồm Booking, Cọc)', v: F.int(c.sql), d: delta(c, p, 'sql'), g: 'g-a', i: '◉' },
     { l: 'Khách quan tâm (MQL)', v: F.int(c.mql), d: delta(c, p, 'mql'), g: 'g-s', i: '♥' },
     { l: 'Lead', v: F.int(c.leads), d: delta(c, p, 'leads'), g: 'g-c', i: '✦' },
   ]);
@@ -655,7 +666,7 @@ function rOverview() {
   columns($('#ov-trend'), series, { aria: 'Diễn biến', key: (r) => r.b, label: (r) => bucketLabel(r.b), val: (r) => r[mt], fmt: money ? F.vnd : F.int, color: () => (mt === 'revenue' ? '#e0475b' : mt === 'spend' ? '#22a6d6' : '#2f6fe0'),
     tip: (r) => [`Chi phí: ${F.full(r.spend)}`, `Lead: ${F.int(r.leads)} · CPL ${F.vnd(r.cpl)}`, `MQL: ${F.int(r.mql)} · Chi phí/MQL ${F.vnd(r.cpmql)}`, `Đã gặp: ${F.int(r.sql)}`, `Booking + Cọc: ${F.int(r.conv)}`, `Doanh số: ${F.vnd(r.revenue)}`] });
   // Phễu
-  funnel($('#ov-funnel'), [['Nhấn link', c.lc], ['Lead', c.leads], ['MQL', c.mql], ['Đã gặp (SQL)', c.sql], ['Booking + Cọc', c.conv]]);
+  funnel($('#ov-funnel'), [['Nhấn link', c.lc], ['Lead', c.leads], ['MQL', c.mql], ['Đã gặp', c.sql], ['Booking + Cọc', c.conv]]);
   // Bảng nhiệt tăng trưởng
   const last = series.slice(-12);
   const M = [['spend', 'Chi phí', F.vnd, true], ['leads', 'Lead', F.int], ['mql', 'MQL', F.int], ['sql', 'Đã gặp', F.int], ['conv', 'Booking + Cọc', F.int], ['revenue', 'Doanh số', F.vnd], ['cpl', 'CPL', F.vnd, true], ['cpmql', 'Chi phí / MQL', F.vnd, true], ['qRate', 'Tỷ lệ qualified', (v) => F.pct(v, 0)]];
@@ -779,7 +790,7 @@ function rCustomer() {
   const s = fSales(), conv = s.filter((r) => r._e && (isSql(r) || isConv(r)));
   const c = cur();
   tiles($('#cu-tiles'), [
-    { l: 'Khách điền form', v: F.int(fCust().length), g: 'g-c', i: '✎' }, { l: 'MQL', v: F.int(c.mql), g: 'g-s', i: '♥' }, { l: 'Đã gặp', v: F.int(c.sql), g: 'g-a', i: '◉' },
+    { l: 'Khách điền form', v: F.int(fCust().length), g: 'g-c', i: '✎' }, { l: 'MQL', v: F.int(c.mql), g: 'g-s', i: '♥' }, { l: 'Đã gặp (tổng)', v: F.int(c.sql), g: 'g-a', i: '◉', s: F.int(c.wait) + ' chưa chốt' },
     { l: 'Booking', v: F.int(c.book), g: 'g-o', i: '★' }, { l: 'Cọc', v: F.int(c.coc), g: 'g-e', i: '✓', s: F.vnd(c.revenue) },
   ]);
   const stage = (r) => (isCoc(r) ? 'Cọc' : r.status);
@@ -933,9 +944,13 @@ function buildFilters() {
   $('#fnote').innerHTML = notes.join(' ');
 }
 function setPreset(p) {
-  const today = S.maxDate, m0 = today.slice(0, 8) + '01';
-  if (p === '7d') [S.from, S.to] = [addDays(today, -6), today];
-  else if (p === 'week') [S.from, S.to] = [weekStart(today), today];
+  const today = S.today, m0 = today.slice(0, 8) + '01', w0 = weekStart(today);
+  if (p === 'today') [S.from, S.to] = [today, today];
+  else if (p === 'yesterday') { const y = addDays(today, -1); [S.from, S.to] = [y, y]; }
+  else if (p === '7d') [S.from, S.to] = [addDays(today, -6), today];
+  else if (p === '30d') [S.from, S.to] = [addDays(today, -29), today];
+  else if (p === 'week') [S.from, S.to] = [w0, today];
+  else if (p === 'lastweek') [S.from, S.to] = [addDays(w0, -7), addDays(w0, -1)];
   else if (p === 'month') [S.from, S.to] = [m0, today];
   else if (p === 'lastmonth') { const e = addDays(m0, -1); [S.from, S.to] = [e.slice(0, 8) + '01', e]; }
   else [S.from, S.to] = [S.minDate, today];
