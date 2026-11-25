@@ -224,6 +224,147 @@ th .eye{margin-left:8px;padding:2px 9px;border-radius:999px;border:1px solid rgb
 .seg.wrap{flex-wrap:wrap;row-gap:4px}
 
 #loader{position:fixed;inset:0;z-index:99;display:grid;place-items:center;background:rgba(6,34,44,.55);backdrop-filter:blur(6px)}#loader .box{background:#f4f6f3;border-radius:20px;padding:26px 30px;max-width:420px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}.hide{display:none!important}.spin{width:34px;height:34px;border-radius:50%;border:4px solid #cfe6ee;border-top-color:#22a6d6;margin:0 auto 12px;animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+/* ===== Giao việc (demo) ===== */
+.tk-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.tk-who{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--ink2)}
+.tk-who select,.tk-f select,.tk-f input,.tk-f textarea,.tk-inline input,.tk-inline select,.tk-inline textarea{border:1px solid rgba(15,44,55,.14);background:rgba(255,255,255,.85);border-radius:10px;padding:7px 10px;font-size:13px;color:var(--ink)}
+.tk-demo{font-size:11px;color:var(--muted);font-style:italic}
+.tk-btn{border:0;cursor:pointer;border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600;color:#06303d;background:radial-gradient(circle at 20% 15%,#ffffff,#bdeefc 45%,#3ec7ef 100%);box-shadow:0 6px 14px rgba(0,0,0,.25),inset 0 -3px 5px rgba(0,60,80,.2);white-space:nowrap}
+.tk-btn:active{transform:translateY(1px)}
+.tk-btn.ghost{background:rgba(255,255,255,.75);box-shadow:var(--sh-sm);font-weight:500}
+.tk-btn.ok{background:linear-gradient(145deg,#2fd096,#0b7a51);color:#fff}
+.tk-btn.bad{background:linear-gradient(145deg,#f7768a,#b5233a);color:#fff}
+.tk-btn.sm{padding:5px 11px;font-size:12px}
+.tk-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.tk-tile{padding:14px 16px}
+.tk-tile .v{font-family:var(--serif);font-size:30px;line-height:1.1;margin-top:6px}
+.tk-tile .l{font-size:12px;color:var(--muted)}
+.tk-tile.red{background:linear-gradient(160deg,#fff1f3,#ffd9df);box-shadow:0 0 0 2px rgba(224,71,91,.35),var(--sh-card)}
+.tk-tile.red .v{color:#b5233a}
+.tk-tile.amber .v{color:#a56406}
+.tk-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.tk-tools .tk-inline{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tk-badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap}
+.tk-flag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10.5px;font-weight:700;white-space:nowrap;margin-left:6px}
+.tk-flag.late{background:#e0475b;color:#fff;animation:tkpulse 1.6s infinite}
+.tk-flag.soon{background:#ffe1e5;color:#b5233a}
+.tk-flag.ext{background:#fff1d6;color:#a56406}
+@keyframes tkpulse{50%{box-shadow:0 0 0 5px rgba(224,71,91,.18)}}
+.tk-prog{height:8px;border-radius:999px;background:rgba(15,44,55,.1);overflow:hidden;min-width:70px}
+.tk-prog>i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#3ec7ef,#12a46f)}
+.tk-table tr.late td{background:rgba(224,71,91,.08)}
+.tk-table tr.soon td{background:rgba(242,165,58,.08)}
+.tk-table tbody tr{cursor:pointer}
+.tk-table tbody tr:hover td{background:rgba(62,199,239,.10)}
+.tk-kan{display:grid;grid-template-columns:repeat(5,minmax(200px,1fr));gap:12px;overflow-x:auto}
+.tk-col{background:rgba(255,255,255,.5);border-radius:16px;padding:10px;box-shadow:var(--sh-press);min-height:200px}
+.tk-col h4{margin:2px 4px 10px;font-size:12.5px;display:flex;justify-content:space-between;align-items:center}
+.tk-card{background:rgba(255,255,255,.92);border-radius:12px;padding:10px 12px;margin-bottom:9px;box-shadow:var(--sh-sm);cursor:pointer;border-left:4px solid #a9b7bd}
+.tk-card:hover{transform:translateY(-1px)}
+.tk-card b{display:block;font-size:13px;margin-bottom:5px;color:var(--ink)}
+.tk-card small{display:block;font-size:11.5px;color:var(--muted);margin-top:4px}
+.tk-card.late{border-left-color:#e0475b;background:#fff4f6}
+.tk-cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.tk-cal .dh{font-size:11px;font-weight:700;color:var(--muted);text-align:center;padding:4px}
+.tk-day{min-width:0;min-height:96px;background:rgba(255,255,255,.6);border-radius:12px;padding:6px;box-shadow:var(--sh-press);font-size:11px}
+.tk-day.out{opacity:.45}
+.tk-day.today{box-shadow:0 0 0 2px #3ec7ef}
+.tk-day .n{font-weight:700;color:var(--ink2);margin-bottom:4px}
+.tk-chip{display:block;border-radius:7px;padding:3px 6px;margin-bottom:3px;color:#fff;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px}
+.tk-modal{position:fixed;inset:0;z-index:100;background:rgba(6,34,44,.55);backdrop-filter:blur(5px);display:flex;align-items:flex-start;justify-content:center;padding:4vh 16px;overflow:auto}
+.tk-modal .box{background:#f6f8f5;border-radius:22px;max-width:860px;width:100%;padding:22px 24px;box-shadow:0 24px 70px rgba(0,0,0,.4);color:var(--ink)}
+.tk-modal h2{margin:0 0 4px;font-size:20px}
+.tk-x{float:right;border:0;background:rgba(15,44,55,.08);border-radius:999px;width:32px;height:32px;cursor:pointer;font-size:16px}
+.tk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 18px;margin:14px 0}
+.tk-kv{font-size:13px}.tk-kv span{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.tk-sec{background:rgba(255,255,255,.75);border-radius:14px;padding:12px 14px;margin-top:12px}
+.tk-sec h4{margin:0 0 8px;font-size:13px}
+.tk-f{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 16px}
+.tk-f label{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--ink2);font-weight:600}
+.tk-f label.full{grid-column:1/-1}
+.tk-f textarea{min-height:62px;resize:vertical;font-weight:400}
+.tk-checks{display:flex;flex-wrap:wrap;gap:10px;font-weight:400}
+.tk-checks label{flex-direction:row;align-items:center;gap:5px;font-weight:400}
+.tk-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.tk-list{list-style:none;margin:0;padding:0;font-size:12.5px}
+.tk-list li{padding:6px 0;border-bottom:1px dashed rgba(15,44,55,.12)}
+.tk-list li small{color:var(--muted);margin-right:6px}
+.tk-err{color:#b5233a;font-size:12.5px;font-weight:600}
+.tk-grade{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;font-weight:800;color:#fff}
+.tk-rec{font-size:12px}
+.tk-rec.good{color:#0b7a51;font-weight:600}.tk-rec.warn{color:#a56406;font-weight:600}.tk-rec.bad{color:#b5233a;font-weight:700}
+.tk-noti li{display:flex;gap:10px;align-items:flex-start}
+.tk-zalo{flex:none;width:28px;height:28px;border-radius:8px;background:#0068ff;color:#fff;font-weight:800;font-size:11px;display:grid;place-items:center}
+.tk-note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:10px}
+.tk-ptiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:10px 0}
+.tk-ptile{background:rgba(255,255,255,.8);border-radius:14px;padding:12px 14px;box-shadow:var(--sh-sm)}
+.tk-ptile .v{font-family:var(--serif);font-size:26px}
+
+#tk-root textarea,.tk-modal textarea,#tk-root input,.tk-modal input{font-family:inherit;font-size:13px;border:1px solid rgba(15,44,55,.14);border-radius:10px;padding:7px 10px;background:rgba(255,255,255,.9);color:var(--ink)}
+#tk-root input[type=range],.tk-modal input[type=range],.tk-modal input[type=checkbox]{padding:0;border:0;background:none}
+/* ---- điểm nhấn: ô số, nút, thanh điều hướng ---- */
+.tk-cta{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;font-size:14px;font-weight:700;background:linear-gradient(135deg,#2ee0c0 0%,#14b8a6 45%,#0b8fa3 100%);color:#fff;box-shadow:0 10px 24px rgba(20,184,166,.45),inset 0 1px 0 rgba(255,255,255,.5);text-shadow:0 1px 2px rgba(4,60,66,.35)}
+.tk-cta:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.tk-cta .tk-ico{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.25)}
+.tk-ico{display:inline-grid;place-items:center;line-height:0}
+.tk-tile{cursor:pointer;position:relative;overflow:hidden;border-left:5px solid transparent;transition:transform .15s}
+.tk-tile:hover{transform:translateY(-2px)}
+.tk-th{display:flex;align-items:center;gap:10px}
+.tk-tile .l{font-size:13px;font-weight:600;color:var(--ink2)}
+.tk-tile .v{font-size:36px;font-weight:600}
+.tk-tile .h{font-size:11.5px;color:var(--muted);margin-top:2px}
+.tk-ic{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;color:#fff;flex:none;box-shadow:0 6px 12px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.35)}
+.k-open{border-left-color:#2f6fe0}.k-open .tk-ic{background:linear-gradient(145deg,#5a93f5,#1d4fb8)}.k-open .v{color:#1d4fb8}
+.k-review{border-left-color:#f2a53a}.k-review .tk-ic{background:linear-gradient(145deg,#ffc56b,#c97c12)}.k-review .v{color:#a56406}
+.k-ext{border-left-color:#8b6fd6}.k-ext .tk-ic{background:linear-gradient(145deg,#b09cf0,#5f43b0)}.k-ext .v{color:#5f43b0}
+.k-bell{border-left-color:#0068ff}.k-bell .tk-ic{background:linear-gradient(145deg,#4f9bff,#0050c8)}.k-bell .v{color:#0050c8}
+.k-soon,.k-late{border-left-color:#12a46f}.k-soon .tk-ic,.k-late .tk-ic{background:linear-gradient(145deg,#2fd096,#0b7a51)}.k-soon .v,.k-late .v{color:#0b7a51}
+.tk-tile.alarm{border-left-color:rgba(255,255,255,.35);color:#fff}
+.tk-tile.alarm .l,.tk-tile.alarm .v,.tk-tile.alarm .h{color:#fff}
+.tk-tile.alarm .h{font-weight:700;letter-spacing:.2px}
+.tk-tile.alarm .tk-ic{background:rgba(255,255,255,.22);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+.k-soon.alarm{background:linear-gradient(140deg,#ff9f6b 0%,#f26a4f 55%,#e0475b 100%);box-shadow:0 12px 26px rgba(242,106,79,.45)}
+.k-late.alarm{background:linear-gradient(140deg,#ff5a6e 0%,#e0263f 50%,#a3122a 100%);animation:tkalarm 1.6s ease-in-out infinite}
+.k-late.alarm .tk-ic{animation:tkshake 1.6s ease-in-out infinite}
+@keyframes tkalarm{0%,100%{box-shadow:0 12px 26px rgba(224,38,63,.45),0 0 0 0 rgba(255,70,90,.55)}50%{box-shadow:0 12px 26px rgba(224,38,63,.55),0 0 0 9px rgba(255,70,90,0)}}
+@keyframes tkshake{0%,80%,100%{transform:rotate(0)}85%{transform:rotate(-12deg)}90%{transform:rotate(12deg)}95%{transform:rotate(-6deg)}}
+.tk-nav{padding:6px;gap:6px;background:rgba(255,255,255,.7)}
+.tk-nav button{display:inline-flex;align-items:center;gap:7px;padding:9px 15px;font-size:13px;font-weight:600;color:var(--ink2)}
+.tk-nav button .tk-ico{color:var(--c)}
+.tk-nav button:hover{background:rgba(255,255,255,.8)}
+.tk-nav button.on{background:linear-gradient(135deg,#2ee0c0,#0b8fa3);color:#fff;box-shadow:0 6px 14px rgba(20,184,166,.4)}
+.tk-nav button.on .tk-ico{color:#fff}
+.nb-work{--c:#2f6fe0}.nb-rank{--c:#d98a12}.nb-staff{--c:#8b6fd6}.nb-recur{--c:#12a46f}.nb-log{--c:#2c4a55}.nb-bell{--c:#0068ff}.nb-me{--c:#14b8a6}
+.tk-cnt{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#e0263f;color:#fff;font-size:11px;font-weight:800;animation:tkpulse 1.6s infinite}
+/* ---- đăng nhập ---- */
+.tk-auth{position:fixed;inset:0;z-index:200;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:7vh 16px;background:radial-gradient(1200px 600px at 20% 10%,#1f7186 0%,#0c3341 45%,#071d26 100%)}
+.tk-acard{width:100%;max-width:420px;background:#f6f8f5;border-radius:24px;padding:28px 28px 22px;box-shadow:0 30px 80px rgba(0,0,0,.45);color:var(--ink)}
+.tk-acard.wide{max-width:640px}
+.tk-abrand{display:flex;gap:12px;align-items:center;margin-bottom:18px}
+.tk-abrand b{display:block;font-size:16px}.tk-abrand small{color:var(--muted);font-size:12px}
+.tk-acard h2{margin:0 0 4px;font-size:22px}
+.tk-asub{margin:0 0 14px;font-size:13px;color:var(--muted);line-height:1.5}
+.tk-afield{display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:var(--ink2);margin-bottom:12px}
+.tk-afield input{font:inherit;font-size:14px;font-weight:400;padding:11px 13px;border-radius:12px;border:1px solid rgba(15,44,55,.18);background:#fff;color:var(--ink)}
+.tk-afield input:focus{outline:2px solid #3ec7ef;border-color:transparent}
+.tk-awide{width:100%;justify-content:center;margin-top:4px}
+.tk-alink{border:0;background:none;color:#0b6f96;cursor:pointer;font:inherit;font-size:13px;padding:8px 0;text-decoration:underline}
+.tk-aerr{background:#ffe8ec;color:#b5233a;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:600;margin-bottom:12px}
+.tk-amsg{background:#e3f7ee;color:#0b7a51;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:600;margin-bottom:12px}
+.tk-ademo{margin-top:14px;padding:12px 14px;border-radius:14px;background:#fff7e6;border:1px dashed #e0b04a;font-size:12.5px;color:#6b4a06}
+.tk-ademo ul{margin:6px 0 10px;padding-left:18px}.tk-ademo li{margin:3px 0}.tk-ademo .tk-alink{padding:0}
+.tk-rules{list-style:none;margin:-4px 0 12px;padding:0;font-size:12px;color:var(--muted)}.tk-rules li.ok{color:#0b7a51;font-weight:600}
+.tk-mails{list-style:none;margin:0 0 10px;padding:0}
+.tk-mails li{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:#fff;margin-bottom:8px;cursor:pointer;box-shadow:var(--sh-sm)}
+.tk-mails li:hover{background:#eef9fd}.tk-mails small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.tk-gm{flex:none;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#ea4335,#fbbc05);color:#fff;font-weight:800;display:grid;place-items:center}
+.tk-gmail{background:#fff;border-radius:16px;padding:18px 20px;font-size:14px;line-height:1.6;box-shadow:var(--sh-sm)}
+.tk-gh{border-bottom:1px solid rgba(15,44,55,.1);padding-bottom:10px;margin-bottom:10px}.tk-gh b{display:block;font-size:16px}.tk-gh small{color:var(--muted);font-size:12px}
+.tk-av{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;font-weight:800;color:#06303d;background:radial-gradient(circle at 25% 20%,#fff,#bdeefc 45%,#3ec7ef 100%);box-shadow:0 6px 14px rgba(0,0,0,.25)}
+.tk-nophone th .eye{display:none}
+.nb-perm{--c:#b5233a}
+
+body.tk-busy{cursor:progress}body.tk-busy .tk-modal .box,body.tk-busy #tk-root{pointer-events:none;opacity:.75}
 </style></head><body><div class="app">
   <aside class="side leather" aria-label="Điều hướng">
     <div class="brand"><div class="logo">HPR</div><div><b>HPR Performance</b><small>Marketing &amp; Sales</small></div></div>
@@ -237,6 +378,8 @@ th .eye{margin-left:8px;padding:2px 9px;border-radius:999px;border:1px solid rgb
     <button class="nav" data-tab="customer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 4a4 4 0 0 1 0 8M22 21c0-3-1.5-5-4-5.6"/></svg>Khách hàng<span class="bdg" id="b-conv">—</span></button>
     <button class="nav" data-tab="meet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15l2 2 4-4"/></svg>Hẹn gặp &amp; gặp thực tế</button>
     <button class="nav" data-tab="team"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Team sale</button>
+    <div class="navh">Quản lý đội ngũ</div>
+    <button class="nav" data-tab="tasks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="17" rx="2"/><path d="M9 4V2.5h6V4M8 10l2 2 4-4M8 16h8"/></svg>Giao việc<span class="bdg" id="b-tasks">—</span></button>
     <div class="navh">Hệ thống</div>
     <button class="nav" data-tab="health"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Chất lượng dữ liệu</button>
     <div class="plan"><b><span>Dữ liệu trực tiếp</span><span>v2</span></b><small>Cập nhật từ Meta Ads và Google Sheet. Trang tự làm mới mỗi 60 giây.</small></div>
@@ -369,6 +512,7 @@ th .eye{margin-left:8px;padding:2px 9px;border-radius:999px;border:1px solid rgb
       </section>
 
       <!-- 7. CHẤT LƯỢNG DỮ LIỆU -->
+      <section class="page" id="p-tasks"><div id="tk-root" style="display:flex;flex-direction:column;gap:16px"></div></section>
       <section class="page" id="p-health">
         <div class="card"><h3>Kiểm tra dữ liệu</h3><p class="sub">Những điểm làm số liệu chưa chính xác</p><div class="rows" id="hl-checks"></div></div>
       </section>
@@ -1025,6 +1169,505 @@ $('#cu-next').onclick = () => { S.cuPage++; render(); };
 $('#q').addEventListener('keydown', (e) => { if (e.key === 'Enter') { $('#cu-q').value = $('#q').value; openTab('customer'); } });
 let rt, lw = innerWidth; addEventListener('resize', () => { if (Math.abs(innerWidth - lw) < 30) return; lw = innerWidth; clearTimeout(rt); rt = setTimeout(render, 200); });
 
+// ===================== GIAO VIỆC & ĐÁNH GIÁ + ĐĂNG NHẬP =====================
+// Dữ liệu lấy từ máy chủ (/api/tasks), lưu ở Google Sheet "Giao việc MKT"; tài khoản ở Cloudflare D1.
+const TK = (function () {
+  const HOUR = 3600e3, DAY = 864e5;
+  const now = () => Date.now();
+  const el = (tag, props, ...kids) => {
+    const e = document.createElement(tag);
+    if (props) for (const [k, v] of Object.entries(props)) {
+      if (v == null || v === false) continue;
+      if (k === 'class') e.className = v; else if (k === 'style') e.style.cssText = v;
+      else if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
+      else if (k === 'value') e.value = v; else if (k === 'checked') e.checked = !!v; else if (k === 'selected') e.selected = !!v;
+      else e.setAttribute(k, v === true ? '' : v);
+    }
+    kids.flat(Infinity).forEach((c) => { if (c == null || c === false) return; e.append(c.nodeType ? c : document.createTextNode(String(c))); });
+    return e;
+  };
+  const pad = (n) => String(n).padStart(2, '0');
+  const fdt = (t) => { if (!t) return '—'; const d = new Date(t); return `${pad(d.getDate())}/${pad(d.getMonth() + 1)} ${pad(d.getHours())}:${pad(d.getMinutes())}`; };
+  const fd = (t) => { const d = new Date(t); return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`; };
+  const toInput = (t) => { if (!t) return ''; const d = new Date(t); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`; };
+  const fromInput = (s) => (s ? new Date(s).getTime() : null);
+  const dayStart = (t) => { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); };
+  const rel = (t) => { const m = Math.round((t - now()) / 60000), a = Math.abs(m); const s = a < 60 ? a + ' phút' : a < 1440 ? Math.round(a / 60) + ' giờ' : Math.round(a / 1440) + ' ngày'; return m >= 0 ? 'còn ' + s : 'trễ ' + s; };
+
+
+  // ---------- Dữ liệu (lấy từ máy chủ, đã lọc theo quyền) ----------
+  const D = { roles: [], types: ['Quảng cáo', 'Nội dung', 'Thiết kế / Video', 'Dữ liệu / Báo cáo', 'Sự kiện', 'Khác'], staff: [], tasks: [], recur: [], log: [], noti: [], comments: {} };
+  let ME = null;
+  const ST = { me: null, sub: 'work', view: 'list', fStaff: '', fStatus: '', period: 'month', calM: null, profile: null };
+  const P = (id) => D.staff.find((s) => s.id === id) || { name: id || '—', pos: '', email: id || '' };
+  const roleOf = (s) => D.roles.find((r) => r.name === s.pos) || { perms: [] };
+  const can = (k) => !!ME && (k === 't:own' || ME.perms.includes(k));
+  const ST_L = { todo: 'Chưa làm', doing: 'Đang làm', review: 'Chờ duyệt', done: 'Hoàn thành', late: 'Trễ hạn' };
+  const ST_C = { todo: '#8fa3ab', doing: '#2f6fe0', review: '#d98a12', done: '#12a46f', late: '#e0475b' };
+  const PRI_C = { 'Cao': '#e0475b', 'Trung bình': '#d98a12', 'Thấp': '#8fa3ab' };
+  const isLate = (t) => t.status !== 'done' && !(t.status === 'review' && t.submittedAt && t.submittedAt <= t.due) && now() > t.due;
+  const disp = (t) => (isLate(t) ? 'late' : t.status);
+  const isSoon = (t) => !isLate(t) && (t.status === 'todo' || t.status === 'doing') && t.due - now() < 24 * HOUR;
+  const badge = (k) => el('span', { class: 'tk-badge', style: `background:${ST_C[k]}` }, ST_L[k]);
+  const flags = (t) => [isLate(t) && el('span', { class: 'tk-flag late' }, 'TRỄ HẠN'), isSoon(t) && el('span', { class: 'tk-flag soon' }, 'Sắp đến hạn'), t.ext && t.ext.state === 'pending' && el('span', { class: 'tk-flag ext' }, 'Xin gia hạn')];
+
+  const ICONS = {
+    open: '<path d="M4 6h16M4 12h16M4 18h10"/>',
+    review: '<path d="M7 3h10M7 21h10M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9"/>',
+    soon: '<circle cx="12" cy="13" r="7"/><path d="M12 9v4l2.5 2M5 4 2.5 6.5M19 4l2.5 2.5"/>',
+    late: '<path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17.5v.5"/>',
+    ext: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/>',
+    bell: '<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4l2-2zM10 20a2 2 0 0 0 4 0"/>',
+    work: '<rect x="4" y="4" width="16" height="17" rx="2"/><path d="M9 4V2.5h6V4M8 11l2 2 4-4M8 17h8"/>',
+    rank: '<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/>',
+    staff: '<circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 4a4 4 0 0 1 0 8M22 21c0-3-1.5-5-4-5.6"/>',
+    recur: '<path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5"/>',
+    log: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    me: '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
+    check: '<path d="m5 12 5 5 9-10"/>',
+    perm: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/>',
+  };
+  const ico = (k, size) => { const sp = document.createElement('span'); sp.className = 'tk-ico'; sp.innerHTML = `<svg width="${size || 18}" height="${size || 18}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${ICONS[k]}</svg>`; return sp; };
+
+
+  const prog = (p) => el('div', { class: 'tk-prog', title: p + '%' }, el('i', { style: `width:${p}%` }));
+  // ---------- Gọi máy chủ ----------
+  function applyState(s) { if (!s) return; ME = s.me; ST.me = s.me.id; Object.assign(D, { staff: s.staff, roles: s.roles || [], tasks: s.tasks, recur: s.recur, log: s.log, noti: s.noti, comments: s.comments || {} }); }
+  let busy = false;
+  async function api(action, payload, okMsg) {
+    if (busy) return false; busy = true; document.body.classList.add('tk-busy');
+    try {
+      const r = await fetch('/api/tasks/act', { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action, ...payload }) });
+      const j = await r.json().catch(() => ({ error: 'Máy chủ không phản hồi (HTTP ' + r.status + ')' }));
+      if (r.status === 401) { showLogin('Phiên đăng nhập đã hết, vui lòng đăng nhập lại.'); return false; }
+      if (!r.ok || j.error) { toast('⚠ ' + (j.error || 'Có lỗi')); return false; }
+      applyState(j.state); closeModal(); applyPerms(); rTasks(); toast(okMsg || j.msg || 'Đã lưu'); return true;
+    } catch (e) { toast('⚠ Mất kết nối, thử lại sau'); return false; }
+    finally { busy = false; document.body.classList.remove('tk-busy'); }
+  }
+  async function loadState() {
+    const r = await fetch('/api/tasks/state', { credentials: 'same-origin', cache: 'no-store' });
+    if (r.status === 401) throw Object.assign(new Error('Chưa đăng nhập'), { auth: true });
+    const j = await r.json().catch(() => ({ error: 'HTTP ' + r.status })); if (!r.ok || j.error) throw new Error(j.error || 'HTTP ' + r.status);
+    applyState(j);
+  }
+
+  // ---------- Đánh giá theo kỳ ----------
+  function range(k) {
+    const d = new Date(); d.setHours(0, 0, 0, 0);
+    const wk = (x) => { const s = new Date(x); s.setDate(s.getDate() - ((s.getDay() + 6) % 7)); return s; };
+    if (k === 'week') { const s = wk(d); return [s.getTime(), s.getTime() + 7 * DAY - 1, 'Tuần này']; }
+    if (k === 'lastweek') { const s = wk(d); return [s.getTime() - 7 * DAY, s.getTime() - 1, 'Tuần trước']; }
+    if (k === 'month') { const s = new Date(d.getFullYear(), d.getMonth(), 1), e = new Date(d.getFullYear(), d.getMonth() + 1, 1); return [s.getTime(), e.getTime() - 1, 'Tháng này']; }
+    if (k === 'lastmonth') { const s = new Date(d.getFullYear(), d.getMonth() - 1, 1), e = new Date(d.getFullYear(), d.getMonth(), 1); return [s.getTime(), e.getTime() - 1, 'Tháng trước']; }
+    const q = Math.floor(d.getMonth() / 3), s = new Date(d.getFullYear(), q * 3, 1), e = new Date(d.getFullYear(), q * 3 + 3, 1); return [s.getTime(), e.getTime() - 1, 'Quý này'];
+  }
+  const GR = (sc) => (sc == null ? null : sc >= 85 ? 'A' : sc >= 70 ? 'B' : sc >= 55 ? 'C' : 'D');
+  const GR_C = { A: '#12a46f', B: '#2f6fe0', C: '#d98a12', D: '#e0475b' };
+  function stats(id, k) {
+    const [a, b] = range(k), ts = D.tasks.filter((t) => t.owner === id && t.due >= a && t.due <= b);
+    const rv = ts.filter((t) => t.review), closed = ts.filter((t) => t.status === 'done' || isLate(t));
+    const onTime = closed.filter((t) => t.submittedAt && t.submittedAt <= t.due).length;
+    const avg = rv.length ? rv.reduce((s, t) => s + t.review.score, 0) / rv.length : null;
+    const rate = closed.length ? onTime / closed.length : null;
+    const score = avg == null ? null : Math.round(0.7 * avg * 10 + 0.3 * (rate == null ? 1 : rate) * 100);
+    return { n: ts.length, done: ts.filter((t) => t.status === 'done').length, late: ts.filter(isLate).length, fail: rv.filter((t) => t.review.result === 'Không đạt').length, avg, rate, score, grade: GR(score) };
+  }
+  function disc(id) {
+    const lates = D.tasks.filter((t) => t.owner === id && t.lateNoNotice), c90 = lates.filter((t) => t.due >= now() - 90 * DAY).length, c180 = lates.filter((t) => t.due >= now() - 180 * DAY).length;
+    if (c180 >= 3) return { lv: 3, c90, c180, text: 'Bậc 3 – Khiển trách: phải họp xử lý kỷ luật đúng trình tự (thông báo trước 5 ngày làm việc).' };
+    if (c90 >= 2) return { lv: 2, c90, c180, text: 'Bậc 2 – Lập biên bản ghi nhận vi phạm + cam kết khắc phục.' };
+    if (c90 >= 1) return { lv: 1, c90, c180, text: 'Bậc 1 – Nhắc nhở trực tiếp, ghi sổ theo dõi.' };
+    return { lv: 0, c90, c180, text: 'Không có vi phạm' };
+  }
+  function rec(s) {
+    if (!s.grade) return el('span', { class: 'tk-rec' }, 'Chưa có việc được chấm');
+    if (s.grade === 'A') return el('span', { class: 'tk-rec good' }, 'Khen: ghi nhận trong họp, đề xuất thưởng');
+    if (s.grade === 'B') return el('span', { class: 'tk-rec' }, 'Đạt yêu cầu, duy trì');
+    if (s.grade === 'C') return el('span', { class: 'tk-rec warn' }, 'Cảnh báo: kèm cặp 1-1, đặt mục tiêu cải thiện');
+    return el('span', { class: 'tk-rec bad' }, 'Báo động: kế hoạch cải thiện bằng văn bản');
+  }
+  const gradeEl = (g) => (g ? el('span', { class: 'tk-grade', style: `background:${GR_C[g]}` }, g) : '—');
+
+
+  // ---------- Khung trang ----------
+  const visible = () => D.tasks;
+  function rTasks() {
+    if (!ME) return;
+    const fl = document.getElementById('filters'); if (fl) fl.style.display = 'none';
+    const me = P(ST.me), vis = visible(), open = vis.filter((t) => t.status !== 'done');
+    document.getElementById('title').textContent = can('t:viewAll') ? 'Giao việc & đánh giá' : 'Việc của tôi';
+    document.getElementById('take').textContent = `${me.name} · ${me.pos} — ${open.length} việc đang mở, ${vis.filter(isLate).length} trễ hạn, ${vis.filter(isSoon).length} sắp đến hạn.`;
+    const bdg = document.getElementById('b-tasks'); if (bdg) bdg.textContent = String(vis.filter((t) => isLate(t) || isSoon(t)).length);
+    const root = document.getElementById('tk-root'); root.replaceChildren();
+    // thanh trên
+    root.append(el('div', { class: 'card' }, el('div', { class: 'tk-bar' },
+      el('div', { class: 'tk-who' }, el('span', { class: 'tk-av' }, me.name.split(' ').map((w) => w[0]).slice(-2).join('')), el('div', null, el('b', null, me.name), el('div', { class: 'tk-demo', style: 'font-style:normal' }, `${me.pos} · ${me.email}`)),
+        el('button', { class: 'tk-btn ghost sm', onclick: logout }, 'Đăng xuất')),
+      el('div', { class: 'tk-who' }, can('t:assign') && el('button', { class: 'tk-btn tk-cta', onclick: () => form() }, ico('plus', 18), 'Giao việc mới')))));
+    // ô số
+    const myN = D.noti.filter((x) => x.to === ST.me).length, mgr = can('t:viewAll'), cExt = can('t:ext');
+    const tl = (l, v, kind, alarm, hint, go) => el('div', { class: `card tk-tile k-${kind}` + (alarm && v ? ' alarm' : ''), role: 'button', tabindex: 0, onclick: go },
+      el('div', { class: 'tk-th' }, el('span', { class: 'tk-ic' }, ico(alarm && !v ? 'check' : kind, 20)), el('div', { class: 'l' }, l)),
+      el('div', { class: 'v' }, v), el('div', { class: 'h' }, alarm ? (v ? hint : 'Không có, ổn') : hint));
+    root.append(el('div', { class: 'tk-tiles' },
+      tl('Việc đang mở', open.length, 'open', false, 'Đang chạy, chưa hoàn thành', () => { ST.sub = 'work'; ST.fStatus = ''; rTasks(); }),
+      tl('Chờ duyệt', vis.filter((t) => t.status === 'review').length, 'review', false, can('t:review') ? 'Cần Giám đốc chấm điểm' : 'Đang chờ Giám đốc duyệt', () => { ST.sub = 'work'; ST.fStatus = 'review'; ST.view = 'list'; rTasks(); }),
+      tl('Sắp đến hạn (24h)', vis.filter(isSoon).length, 'soon', true, 'Cần hoàn thành hoặc xin gia hạn', () => { ST.sub = 'work'; ST.fStatus = 'soon'; ST.view = 'list'; rTasks(); }),
+      tl('Trễ hạn', vis.filter(isLate).length, 'late', true, 'BÁO ĐỘNG – xử lý ngay', () => { ST.sub = 'work'; ST.fStatus = 'late'; ST.view = 'list'; rTasks(); }),
+      tl(cExt ? 'Xin gia hạn' : 'Thông báo', cExt ? vis.filter((t) => t.ext && t.ext.state === 'pending').length : myN, cExt ? 'ext' : 'bell', false, cExt ? 'Chờ Giám đốc quyết định' : 'Thông báo đã nhận', () => { ST.sub = cExt ? 'work' : 'noti'; ST.fStatus = cExt ? 'ext' : ''; rTasks(); })));
+    // điều hướng con
+    const nLate = vis.filter(isLate).length, nAlarmStaff = can('t:rank') ? D.staff.filter((s) => !roleOf(s).locked && s.active && (GR(stats(s.id, 'month').score) === 'D' || disc(s.id).lv >= 2)).length : 0;
+    const subs = [['work', mgr ? 'Công việc' : 'Việc của tôi', 'work', nLate], can('t:rank') ? ['rank', 'Xếp hạng & đánh giá', 'rank', nAlarmStaff] : ['me', 'Hồ sơ đánh giá của tôi', 'me'], can('t:staff') && ['staff', 'Nhân sự & tài khoản', 'staff'], can('t:perm') && ['perm', 'Phân quyền', 'perm'], can('t:assign') && ['recur', 'Việc lặp lại', 'recur'], can('t:log') && ['log', 'Lịch sử thay đổi', 'log'], ['noti', 'Thông báo', 'bell']].filter(Boolean);
+    if (!subs.some((x) => x[0] === ST.sub)) ST.sub = 'work';
+    root.append(el('div', { class: 'seg tk-nav' }, subs.map(([k, l, ic, n]) => el('button', { class: `nb-${ic}` + (ST.sub === k ? ' on' : ''), onclick: () => { ST.sub = k; ST.profile = null; rTasks(); } }, ico(ic, 16), l, n ? el('span', { class: 'tk-cnt' }, n) : null))));
+    const body = el('div', { class: 'card' }); root.append(body);
+    if (ST.profile) return profile(body, ST.profile);
+    ({ work, rank, staff: staffPage, perm: permPage, recur: recurPage, log: logPage, noti: notiPage, me: () => profile(body, ST.me) })[ST.sub](body);
+  }
+
+  // ---------- Công việc: danh sách / kanban / lịch ----------
+  function work(body) {
+    let ts = visible();
+    if (ST.fStaff) ts = ts.filter((t) => t.owner === ST.fStaff);
+    const f = ST.fStatus;
+    if (f === 'late') ts = ts.filter(isLate); else if (f === 'soon') ts = ts.filter(isSoon); else if (f === 'ext') ts = ts.filter((t) => t.ext && t.ext.state === 'pending'); else if (f) ts = ts.filter((t) => disp(t) === f);
+    const views = el('div', { class: 'seg light' }, [['list', 'Danh sách'], ['kanban', 'Kanban'], ['cal', 'Lịch']].map(([k, l]) => el('button', { class: ST.view === k ? 'on' : '', onclick: () => { ST.view = k; rTasks(); } }, l)));
+    const fSel = el('select', { onchange: (e) => { ST.fStatus = e.target.value; rTasks(); } }, [['', 'Mọi trạng thái'], ['todo', 'Chưa làm'], ['doing', 'Đang làm'], ['review', 'Chờ duyệt'], ['done', 'Hoàn thành'], ['late', 'Trễ hạn'], ['soon', 'Sắp đến hạn'], ['ext', 'Xin gia hạn']].map(([v, l]) => el('option', { value: v, selected: v === f }, l)));
+    const pSel = can('t:viewAll') && el('select', { onchange: (e) => { ST.fStaff = e.target.value; rTasks(); } }, el('option', { value: '' }, 'Tất cả nhân sự'), D.staff.filter((s) => !roleOf(s).locked).map((s) => el('option', { value: s.id, selected: s.id === ST.fStaff }, s.name)));
+    body.append(el('div', { class: 'tk-tools' }, views, el('div', { class: 'tk-inline' }, pSel, fSel)));
+    if (ST.view === 'kanban') return kanban(body, ts);
+    if (ST.view === 'cal') return calendar(body, ts);
+    list(body, ts);
+  }
+  function list(body, ts) {
+    if (!ts.length) return body.append(el('p', { class: 'sub' }, 'Không có việc nào khớp bộ lọc.'));
+    const rows = ts.slice().sort((a, b) => (a.status === 'done') - (b.status === 'done') || a.due - b.due);
+    const tb = el('tbody', null, rows.map((t) => el('tr', { class: isLate(t) ? 'late' : isSoon(t) ? 'soon' : '', onclick: () => detail(t.id) },
+      el('td', null, t.code), el('td', null, el('b', null, t.title), t.recur && el('small', { style: 'display:block;color:var(--muted)' }, '↻ ' + t.recur)), el('td', null, t.type),
+      el('td', null, P(t.owner).name, ST.me !== t.owner && t.support.includes(ST.me) ? ' (bạn hỗ trợ)' : ''), el('td', null, t.support.map((s) => P(s).name).join(', ') || '—'),
+      el('td', null, fdt(t.due), el('small', { style: 'display:block;color:var(--muted)' }, t.status === 'done' ? '' : rel(t.due))),
+      el('td', null, el('span', { style: `color:${PRI_C[t.priority]};font-weight:700` }, t.priority)),
+      el('td', null, prog(t.progress), el('small', null, t.progress + '%')), el('td', null, badge(disp(t)), flags(t).slice(1)))));
+    body.append(el('div', { class: 'tw' }, el('table', { class: 'tk-table' }, el('thead', null, el('tr', null, ['Mã', 'Tên việc', 'Loại', 'Người làm', 'Hỗ trợ', 'Hạn chót', 'Ưu tiên', 'Tiến độ', 'Trạng thái'].map((h) => el('th', null, h)))), tb)));
+  }
+  function kanban(body, ts) {
+    const cols = ['todo', 'doing', 'review', 'done', 'late'];
+    body.append(el('div', { class: 'tk-kan' }, cols.map((c) => {
+      const cs = ts.filter((t) => disp(t) === c).sort((a, b) => a.due - b.due);
+      return el('div', { class: 'tk-col' }, el('h4', null, el('span', null, ST_L[c]), el('span', { class: 'tk-badge', style: `background:${ST_C[c]}` }, cs.length)),
+        cs.map((t) => el('div', { class: 'tk-card' + (isLate(t) ? ' late' : ''), style: `border-left-color:${ST_C[disp(t)]}`, onclick: () => detail(t.id) },
+          el('b', null, t.title), prog(t.progress), el('small', null, `${t.code} · ${P(t.owner).name}`), el('small', null, `Hạn ${fdt(t.due)}`, flags(t)))));
+    })));
+  }
+  function calendar(body, ts) {
+    if (ST.calM == null) { const d = new Date(); ST.calM = [d.getFullYear(), d.getMonth()]; }
+    const [y, m] = ST.calM, first = new Date(y, m, 1), start = new Date(first); start.setDate(1 - ((first.getDay() + 6) % 7));
+    const nav = (dx) => () => { const d = new Date(y, m + dx, 1); ST.calM = [d.getFullYear(), d.getMonth()]; rTasks(); };
+    body.append(el('div', { class: 'tk-tools' }, el('div', { class: 'tk-inline' }, el('button', { class: 'tk-btn ghost sm', onclick: nav(-1) }, '‹ Tháng trước'), el('b', null, `Tháng ${m + 1}/${y}`), el('button', { class: 'tk-btn ghost sm', onclick: nav(1) }, 'Tháng sau ›'), el('button', { class: 'tk-btn ghost sm', onclick: () => { ST.calM = null; rTasks(); } }, 'Hôm nay')), el('span', { class: 'tk-demo' }, 'Mỗi việc nằm ở ngày hạn chót')));
+    const grid = el('div', { class: 'tk-cal' }, ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((x) => el('div', { class: 'dh' }, x)));
+    const today = dayStart(now());
+    for (let i = 0; i < 42; i++) {
+      const d = new Date(start); d.setDate(start.getDate() + i); const ds = d.getTime();
+      const items = ts.filter((t) => dayStart(t.due) === ds).sort((a, b) => a.due - b.due);
+      grid.append(el('div', { class: 'tk-day' + (d.getMonth() !== m ? ' out' : '') + (ds === today ? ' today' : '') }, el('div', { class: 'n' }, d.getDate()),
+        items.map((t) => el('span', { class: 'tk-chip', style: `background:${ST_C[disp(t)]}`, title: `${t.title} – ${P(t.owner).name}`, onclick: () => detail(t.id) }, `${pad(new Date(t.due).getHours())}:${pad(new Date(t.due).getMinutes())} ${t.title}`))));
+    }
+    body.append(grid);
+  }
+
+  // ---------- Cửa sổ chi tiết việc ----------
+  function modal(...kids) {
+    closeModal();
+    const m = el('div', { class: 'tk-modal', id: 'tk-modal', onclick: (e) => { if (e.target === m) closeModal(); } }, el('div', { class: 'box' }, el('button', { class: 'tk-x', onclick: closeModal, 'aria-label': 'Đóng' }, '×'), kids));
+    document.body.append(m); return m;
+  }
+  function closeModal() { const m = document.getElementById('tk-modal'); if (m) m.remove(); }
+  const done = (msg) => { closeModal(); rTasks(); if (msg) toast(msg); };
+  function toast(msg) { const old = document.getElementById('tk-toast'); if (old) old.remove(); const t = el('div', { id: 'tk-toast',  style: 'position:fixed;right:24px;bottom:24px;z-index:120;background:#0f2530;color:#fff;padding:12px 16px;border-radius:12px;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.35)' }, msg); document.body.append(t); setTimeout(() => t.remove(), 3200); }
+
+
+  function detail(id) {
+    const t = D.tasks.find((x) => x.id === id); if (!t) return;
+    const me = ST.me, owner = t.owner === me, sup = t.support.includes(me), dir = can('t:viewAll');
+    const kv = (k, v) => el('div', { class: 'tk-kv' }, el('span', null, k), v);
+    const secs = [];
+    const pr = el('input', { type: 'range', min: 0, max: 100, step: 5, value: t.progress, style: 'flex:1' }), prL = el('b', null, t.progress + '%');
+    pr.oninput = () => { prL.textContent = pr.value + '%'; };
+    secs.push(el('div', { class: 'tk-sec' }, el('h4', null, 'Tiến độ hoàn thành'), owner && t.status === 'doing'
+      ? el('div', { style: 'display:flex;gap:10px;align-items:center' }, pr, prL, el('button', { class: 'tk-btn sm', onclick: () => api('progress', { id: t.id, progress: +pr.value }) }, 'Lưu tiến độ'))
+      : el('div', { style: 'display:flex;gap:10px;align-items:center' }, el('div', { style: 'flex:1' }, prog(t.progress)), el('b', null, t.progress + '%'))));
+    const lk = el('input', { placeholder: 'Dán link kết quả (Drive, Canva, bài đăng…)', style: 'flex:1' });
+    secs.push(el('div', { class: 'tk-sec' }, el('h4', null, 'Link đính kèm'), el('ul', { class: 'tk-list' }, t.links.length ? t.links.map((l) => el('li', null, el('a', { href: /^https?:\/\//i.test(l) ? l : '#', target: '_blank', rel: 'noopener noreferrer' }, l))) : el('li', null, 'Chưa có link')),
+      (owner || sup || dir) && t.status !== 'done' && el('div', { style: 'display:flex;gap:8px;margin-top:8px' }, lk, el('button', { class: 'tk-btn ghost sm', onclick: () => { const v = lk.value.trim(); if (!/^https?:\/\//i.test(v)) return toast('Link phải bắt đầu bằng http:// hoặc https://'); api('link', { id: t.id, url: v }); } }, 'Thêm link'))));
+    const nt = el('textarea', { placeholder: 'Ghi chú, khó khăn, cần hỗ trợ gì…', style: 'flex:1;min-height:48px' });
+    secs.push(el('div', { class: 'tk-sec' }, el('h4', null, 'Ghi chú'), el('ul', { class: 'tk-list' }, t.notes.length ? t.notes.map((n) => el('li', null, el('small', null, `${fdt(n.at)} · ${P(n.by).name}`), n.text)) : el('li', null, 'Chưa có ghi chú')),
+      (owner || sup || dir) && el('div', { style: 'display:flex;gap:8px;margin-top:8px' }, nt, el('button', { class: 'tk-btn ghost sm', onclick: () => { const v = nt.value.trim(); if (v) api('note', { id: t.id, text: v }); } }, 'Lưu ghi chú'))));
+    if (t.ext && t.ext.state === 'pending') {
+      secs.push(el('div', { class: 'tk-sec', style: 'background:#fff7e6' }, el('h4', null, 'Đơn xin gia hạn đang chờ duyệt'),
+        el('p', { style: 'margin:0;font-size:13px' }, `Gửi lúc ${fdt(t.ext.at)} · Hạn mới đề xuất: `, el('b', null, fdt(t.ext.due)), el('br'), 'Lý do: ', t.ext.reason),
+        can('t:ext') && el('div', { class: 'tk-actions' },
+          el('button', { class: 'tk-btn ok sm', onclick: () => api('extDecide', { id: t.id, ok: true }) }, 'Duyệt gia hạn'),
+          el('button', { class: 'tk-btn bad sm', onclick: () => api('extDecide', { id: t.id, ok: false }) }, 'Từ chối'))));
+    } else if (owner && (t.status === 'todo' || t.status === 'doing')) {
+      const nd = el('input', { type: 'datetime-local', value: toInput(t.due + DAY) }), rs = el('input', { placeholder: 'Lý do xin gia hạn', style: 'flex:1' });
+      secs.push(el('div', { class: 'tk-sec' }, el('h4', null, 'Xin gia hạn (cần Giám đốc duyệt)'), el('div', { style: 'display:flex;gap:8px;flex-wrap:wrap' }, nd, rs,
+        el('button', { class: 'tk-btn ghost sm', onclick: () => { const v = fromInput(nd.value); if (!v || v <= t.due) return toast('Hạn mới phải sau hạn hiện tại'); if (!rs.value.trim()) return toast('Cần ghi lý do'); api('extReq', { id: t.id, due: v, reason: rs.value.trim() }); } }, 'Gửi xin gia hạn'))));
+    }
+    if (t.review) {
+      secs.push(el('div', { class: 'tk-sec', style: 'background:#eefaf4' }, el('h4', null, 'Kết quả đánh giá của Giám đốc'),
+        el('p', { style: 'margin:0;font-size:13px' }, el('b', null, `${t.review.result} · ${t.review.score}/10`), ` (chấm lúc ${fdt(t.review.at)})`, el('br'), 'Feedback: ', t.review.feedback)));
+    } else if (can('t:review') && t.status === 'review') {
+      const rsel = el('select', null, ['Đạt', 'Đạt có sửa', 'Không đạt'].map((x) => el('option', null, x)));
+      const sc = el('input', { type: 'number', min: 1, max: 10, step: 1, value: 8, style: 'width:80px' });
+      const fb = el('textarea', { placeholder: 'Đánh giá mức độ, lý do chấm điểm…' });
+      const err = el('div', { class: 'tk-err' });
+      secs.push(el('div', { class: 'tk-sec', style: 'background:#eef7fb' }, el('h4', null, 'Chấm điểm & nghiệm thu'),
+        el('div', { class: 'tk-f' }, el('label', null, 'Kết quả', rsel), el('label', null, 'Điểm (1–10)', sc), el('label', { class: 'full' }, 'Feedback', fb)), err,
+        el('div', { class: 'tk-actions' },
+          el('button', { class: 'tk-btn ok', onclick: () => { const s = +sc.value; if (!(s >= 1 && s <= 10)) { err.textContent = 'Điểm phải từ 1 đến 10'; return; } if (!fb.value.trim()) { err.textContent = 'Cần ghi feedback (lý do chấm điểm)'; return; } api('review', { id: t.id, result: rsel.value, score: s, feedback: fb.value.trim() }); } }, 'Chấm điểm & Hoàn thành'),
+          el('button', { class: 'tk-btn ghost', onclick: () => api('redo', { id: t.id, why: fb.value.trim() }) }, 'Yêu cầu làm lại'))));
+    }
+    const acts = [];
+    if (owner && t.status === 'todo') acts.push(el('button', { class: 'tk-btn', onclick: () => api('start', { id: t.id }) }, 'Bắt đầu làm'));
+    if (owner && t.status === 'doing') acts.push(el('button', { class: 'tk-btn ok', onclick: () => api('submit', { id: t.id }) }, 'Gửi duyệt'));
+    if (owner && t.status === 'review') acts.push(el('span', { class: 'tk-demo' }, 'Đã gửi, đang chờ Giám đốc duyệt. Chỉ Giám đốc được chuyển sang Hoàn thành.'));
+    if (can('t:assign') && t.status !== 'done') acts.push(el('button', { class: 'tk-btn ghost', onclick: () => form(t) }, 'Sửa việc'));
+    const hist = D.log.filter((l) => l.code === t.code);
+    modal(
+      el('div', { class: 'tk-demo' }, t.code + (t.recur ? ' · ↻ ' + t.recur : '')), el('h2', null, t.title), el('div', null, badge(disp(t)), flags(t), t.status !== 'done' && el('span', { class: 'tk-demo', style: 'margin-left:8px' }, rel(t.due))),
+      el('div', { class: 'tk-grid' }, kv('Loại công việc', t.type), kv('Kết quả đầu ra', t.output || '—'), kv('Người làm chính', P(t.owner).name), kv('Người hỗ trợ', t.support.map((s) => P(s).name).join(', ') || '—'), kv('Người duyệt', P(t.reviewer).name),
+        kv('Ngày giờ giao', fdt(t.assignedAt)), kv('Mốc kiểm tra', fdt(t.checkpoint)), kv('Ngày giờ hạn chót', el('b', { style: isLate(t) ? 'color:#b5233a' : '' }, fdt(t.due))), kv('Thời gian ước tính', t.est + ' giờ'), kv('Ưu tiên', el('b', { style: `color:${PRI_C[t.priority]}` }, t.priority))),
+      secs, acts.length && el('div', { class: 'tk-actions' }, acts),
+      el('div', { class: 'tk-sec' }, el('h4', null, 'Lịch sử thay đổi của việc này'), el('ul', { class: 'tk-list' }, hist.length ? hist.map((l) => el('li', null, el('small', null, `${fdt(l.at)} · ${l.by}`), `${l.action}${l.detail ? ': ' + l.detail : ''}`)) : el('li', null, '—'))));
+  }
+
+  // ---------- Form giao / sửa việc ----------
+  function form(t) {
+    const edit = !!t, staffOpts = D.staff.filter((s) => s.active && !roleOf(s).locked);
+    if (!staffOpts.length) return toast('Chưa có nhân viên đang hoạt động để giao việc');
+    const f = {
+      title: el('input', { value: edit ? t.title : '' }), type: el('select', null, D.types.map((x) => el('option', { selected: edit && t.type === x }, x))),
+      output: el('textarea', { value: edit ? t.output : '' }), owner: el('select', null, staffOpts.map((s) => el('option', { value: s.id, selected: edit && t.owner === s.id }, `${s.name} – ${s.pos}`))),
+      reviewer: el('select', null, D.staff.filter((s) => s.active && roleOf(s).locked).map((s) => el('option', { value: s.id, selected: edit && t.reviewer === s.id }, s.name))),
+      assignedAt: el('input', { type: 'datetime-local', value: toInput(edit ? t.assignedAt : now()) }), checkpoint: el('input', { type: 'datetime-local', value: toInput(edit ? t.checkpoint : null) }),
+      due: el('input', { type: 'datetime-local', value: toInput(edit ? t.due : now() + 2 * DAY) }), est: el('input', { type: 'number', min: 0.5, step: 0.5, value: edit ? t.est : 2 }),
+      priority: el('select', null, ['Cao', 'Trung bình', 'Thấp'].map((x) => el('option', { selected: edit ? t.priority === x : x === 'Trung bình' }, x))),
+      links: el('textarea', { placeholder: 'Mỗi dòng một link (brief, tài liệu tham khảo…)', value: edit ? t.links.join('\n') : '' }),
+      recur: el('select', null, el('option', { value: '' }, 'Không lặp lại'), el('option', { value: 'weekly' }, 'Hằng tuần (cùng thứ, cùng giờ với hạn chót)'), el('option', { value: 'monthly' }, 'Hằng tháng (cùng ngày, cùng giờ với hạn chót)')),
+    };
+    const sup = el('div', { class: 'tk-checks' }, staffOpts.map((s) => el('label', null, el('input', { type: 'checkbox', value: s.id, checked: edit && t.support.includes(s.id) }), s.name)));
+    const err = el('div', { class: 'tk-err' });
+    const save = () => {
+      const v = { title: f.title.value.trim(), type: f.type.value, output: f.output.value.trim(), owner: f.owner.value, reviewer: f.reviewer.value, assignedAt: fromInput(f.assignedAt.value), checkpoint: fromInput(f.checkpoint.value), due: fromInput(f.due.value), est: +f.est.value || 1, priority: f.priority.value, links: f.links.value.split('\n').map((x) => x.trim()).filter(Boolean) };
+      v.support = [...sup.querySelectorAll('input:checked')].map((x) => x.value).filter((x) => x !== v.owner);
+      if (!v.title || !v.output || !v.due) { err.textContent = 'Cần điền Tên việc, Kết quả đầu ra và Hạn chót.'; return; }
+      if (v.assignedAt && v.due <= v.assignedAt) { err.textContent = 'Hạn chót phải sau ngày giờ giao.'; return; }
+      if (v.checkpoint && (v.checkpoint > v.due || v.checkpoint < (v.assignedAt || 0))) { err.textContent = 'Mốc kiểm tra phải nằm giữa ngày giao và hạn chót.'; return; }
+      if (v.links.some((l) => !/^https?:\/\//i.test(l))) { err.textContent = 'Mỗi link phải bắt đầu bằng http:// hoặc https://'; return; }
+      if (edit) api('edit', { id: t.id, task: v }); else api('create', { task: v, recur: f.recur.value });
+    };
+    modal(el('h2', null, edit ? `Sửa việc ${t.code}` : 'Giao việc mới'), el('p', { class: 'tk-demo' }, edit ? 'Mọi thay đổi đều được lưu vào lịch sử.' : 'Mã việc tự sinh. Người làm chính nhận email thông báo ngay khi lưu.'),
+      el('div', { class: 'tk-f', style: 'margin-top:12px' },
+        el('label', { class: 'full' }, 'Tên việc *', f.title), el('label', null, 'Loại công việc', f.type), el('label', null, 'Ưu tiên', f.priority),
+        el('label', { class: 'full' }, 'Kết quả đầu ra * (đo được)', f.output),
+        el('label', null, 'Người làm chính *', f.owner), el('label', null, 'Người duyệt', f.reviewer), el('label', { class: 'full' }, 'Người hỗ trợ', sup),
+        el('label', null, 'Ngày giờ giao', f.assignedAt), el('label', null, 'Mốc kiểm tra', f.checkpoint), el('label', null, 'Ngày giờ hạn chót *', f.due), el('label', null, 'Thời gian ước tính (giờ)', f.est),
+        el('label', { class: 'full' }, 'Link đính kèm', f.links), !edit && el('label', { class: 'full' }, 'Lặp lại', f.recur)),
+      err, el('div', { class: 'tk-actions' }, el('button', { class: 'tk-btn', onclick: save }, edit ? 'Lưu thay đổi' : 'Giao việc'), el('button', { class: 'tk-btn ghost', onclick: closeModal }, 'Hủy')));
+  }
+
+  // ---------- Nhân sự & tài khoản ----------
+  const ACC_L = { none: ['Chưa mời', '#8fa3ab'], invited: ['Đã mời – chờ tạo mật khẩu', '#d98a12'], active: ['Đã kích hoạt', '#12a46f'], locked: ['Đã khóa', '#e0475b'] };
+  function staffPage(body) {
+    body.append(el('h3', { style: 'margin:0 0 4px' }, 'Nhân sự & tài khoản đăng nhập'), el('p', { class: 'sub' }, 'Nhân sự đăng nhập bằng Gmail được mời. Link tạo mật khẩu gửi qua Gmail, dùng một lần, hết hạn sau 48 giờ. Quyền xem do vị trí quyết định (mục Phân quyền).'));
+    body.append(el('div', { class: 'tw', style: 'max-height:none' }, el('table', { class: 'tk-table' }, el('thead', null, el('tr', null, ['Họ tên', 'Vị trí', 'Gmail đăng nhập', 'Zalo', 'Tài khoản', 'Thao tác'].map((h) => el('th', null, h)))),
+      el('tbody', null, D.staff.map((s) => {
+        const st = !s.active ? 'locked' : s.status || 'none', self = s.id === ST.me;
+        const pos = el('select', { disabled: self || !can('t:perm'), onchange: (e) => api('staffPos', { email: s.id, pos: e.target.value }) }, D.roles.map((r) => el('option', { value: r.name, selected: r.name === s.pos }, r.name)));
+        const acts = [];
+        if (s.active && (st === 'none' || st === 'invited')) acts.push(el('button', { class: 'tk-btn sm', onclick: () => api('staffInvite', { email: s.id }) }, st === 'none' ? 'Gửi lời mời' : 'Gửi lại lời mời'));
+        if (!self) acts.push(el('button', { class: 'tk-btn ghost sm', onclick: () => api('staffToggle', { email: s.id }) }, s.active ? 'Khóa' : 'Mở khóa'));
+        return el('tr', { style: 'cursor:default' }, el('td', null, el('b', null, s.name), self ? ' (bạn)' : ''), el('td', null, pos), el('td', null, s.email || '—'), el('td', null, s.zalo || '—'),
+          el('td', null, el('span', { class: 'tk-badge', style: `background:${ACC_L[st][1]}` }, ACC_L[st][0])), el('td', null, el('div', { style: 'display:flex;gap:6px;flex-wrap:wrap' }, acts)));
+      })))));
+    const nm = el('input', { placeholder: 'Họ tên' }), em = el('input', { placeholder: 'ten@gmail.com' }), zl = el('input', { placeholder: 'Số Zalo' });
+    const ps = el('select', null, D.roles.filter((r) => !r.locked).map((r) => el('option', null, r.name)));
+    const send = el('input', { type: 'checkbox', checked: true });
+    const err = el('div', { class: 'tk-err' });
+    body.append(el('div', { class: 'tk-sec' }, el('h4', null, 'Thêm nhân viên'), el('div', { class: 'tk-f' }, el('label', null, 'Họ tên *', nm), el('label', null, 'Vị trí *', ps), el('label', null, 'Gmail đăng nhập *', em), el('label', null, 'Số Zalo', zl),
+      el('label', { class: 'full', style: 'flex-direction:row;align-items:center;gap:8px;font-weight:400' }, send, 'Gửi lời mời qua Gmail ngay')), err,
+      el('div', { class: 'tk-actions' }, el('button', { class: 'tk-btn', onclick: () => {
+        const e = em.value.trim().toLowerCase();
+        if (!nm.value.trim()) { err.textContent = 'Cần nhập họ tên'; return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) { err.textContent = 'Gmail không hợp lệ'; return; }
+        api('staffAdd', { name: nm.value.trim(), pos: ps.value, email: e, zalo: zl.value.trim(), invite: send.checked });
+      } }, 'Thêm nhân viên'))));
+  }
+
+  // ---------- Phân quyền theo vị trí ----------
+  const PERMS = [
+    ['Dashboard – Marketing & Kinh doanh', [['tab:overview', 'Tổng quan'], ['tab:campaign', 'Chiến dịch'], ['tab:content', 'Nội dung'], ['tab:time', 'Thời điểm khách điền form'], ['tab:customer', 'Khách hàng'], ['tab:meet', 'Hẹn gặp & gặp thực tế'], ['tab:team', 'Team sale'], ['tab:health', 'Chất lượng dữ liệu']]],
+    ['Dữ liệu nhạy cảm', [['phone', 'Được xem số điện thoại, email khách hàng đầy đủ']]],
+    ['Giao việc', [['t:own', 'Xem & cập nhật việc của mình (luôn có)'], ['t:viewAll', 'Xem việc của tất cả nhân sự'], ['t:assign', 'Giao việc, sửa việc, tạo việc lặp lại'], ['t:review', 'Chấm điểm & nhận xét nhân sự'], ['t:ext', 'Duyệt xin gia hạn'], ['t:rank', 'Xem xếp hạng & hồ sơ đánh giá của người khác'], ['t:log', 'Xem lịch sử thay đổi']]],
+    ['Quản trị', [['t:staff', 'Quản lý nhân sự & gửi lời mời'], ['t:perm', 'Phân quyền & tạo vị trí']]],
+  ];
+  function permPage(body) {
+    body.append(el('h3', { style: 'margin:0 0 4px' }, 'Phân quyền theo vị trí'), el('p', { class: 'sub' }, 'Tích chọn những gì mỗi vị trí được xem và được làm, rồi bấm Lưu. Nhân sự thuộc vị trí nào nhận đúng quyền của vị trí đó, áp dụng từ lần tải trang kế tiếp. Quyền được kiểm tra ở máy chủ, không chỉ ẩn trên màn hình.'));
+    const draft = Object.fromEntries(D.roles.map((r) => [r.name, new Set(r.perms)]));
+    const head = el('tr', null, el('th', null, 'Quyền'), D.roles.map((r) => el('th', { style: 'text-align:center' }, r.name, el('small', { style: 'display:block;font-weight:400;text-transform:none;letter-spacing:0' }, `${D.staff.filter((s) => s.pos === r.name).length} người`))));
+    const rows = [];
+    PERMS.forEach(([g, ps]) => {
+      rows.push(el('tr', { style: 'cursor:default' }, el('td', { colspan: D.roles.length + 1, style: 'background:rgba(62,199,239,.12);font-weight:700;font-size:12px' }, g)));
+      ps.forEach(([k, l]) => rows.push(el('tr', { style: 'cursor:default' }, el('td', null, l), D.roles.map((r) => el('td', { style: 'text-align:center' },
+        el('input', { type: 'checkbox', checked: r.locked || k === 't:own' || draft[r.name].has(k), disabled: r.locked || k === 't:own', style: 'width:18px;height:18px;cursor:pointer', onchange: (e) => { if (e.target.checked) draft[r.name].add(k); else draft[r.name].delete(k); } }))))));
+    });
+    body.append(el('div', { class: 'tw', style: 'max-height:none' }, el('table', { class: 'tk-table' }, el('thead', null, head), el('tbody', null, rows))));
+    body.append(el('div', { class: 'tk-actions' }, el('button', { class: 'tk-btn tk-cta', onclick: () => api('rolesSave', { perms: Object.fromEntries(D.roles.filter((r) => !r.locked).map((r) => [r.name, [...draft[r.name]]])) }) }, ico('check', 18), 'Lưu phân quyền'),
+      el('span', { class: 'tk-demo' }, 'Vị trí Giám đốc Marketing luôn đủ quyền để tránh tự khóa mình khỏi hệ thống.')));
+    const nm = el('input', { placeholder: 'Tên vị trí mới, ví dụ: Content Marketing' }), cp = el('select', null, el('option', { value: '' }, 'Không sao chép – bắt đầu trống'), D.roles.map((r) => el('option', { value: r.name }, 'Sao chép quyền từ: ' + r.name)));
+    body.append(el('div', { class: 'tk-sec' }, el('h4', null, 'Tạo vị trí mới'), el('div', { style: 'display:flex;gap:8px;flex-wrap:wrap' }, nm, cp, el('button', { class: 'tk-btn sm', onclick: () => { const v = nm.value.trim(); if (!v) return toast('Cần nhập tên vị trí'); api('roleAdd', { name: v, copy: cp.value }); } }, 'Tạo vị trí'))));
+  }
+
+  // ---------- Xếp hạng & đánh giá ----------
+  function periodSeg() { return el('div', { class: 'seg light' }, [['week', 'Tuần này'], ['lastweek', 'Tuần trước'], ['month', 'Tháng này'], ['lastmonth', 'Tháng trước'], ['quarter', 'Quý này']].map(([k, l]) => el('button', { class: ST.period === k ? 'on' : '', onclick: () => { ST.period = k; rTasks(); } }, l))); }
+  function rank(body) {
+    const [a, b, lbl] = range(ST.period);
+    const rows = D.staff.filter((s) => !roleOf(s).locked && s.active).map((s) => ({ s, st: stats(s.id, ST.period), dc: disc(s.id) })).sort((x, y) => (y.st.score ?? -1) - (x.st.score ?? -1));
+    body.append(el('div', { class: 'tk-tools' }, el('div', null, el('h3', { style: 'margin:0' }, `Bảng xếp hạng nhân sự – ${lbl}`), el('p', { class: 'sub', style: 'margin:2px 0 0' }, `${fd(a)} – ${fd(b)} · tính trên các việc có hạn chót trong kỳ`)), periodSeg()));
+    body.append(el('div', { class: 'tw' }, el('table', { class: 'tk-table' }, el('thead', null, el('tr', null, ['Hạng', 'Nhân sự', 'Việc trong kỳ', 'Hoàn thành', 'Trễ hạn', 'Không đạt', 'Điểm TB (/10)', 'Đúng hạn', 'Điểm kỳ', 'Xếp loại', 'Đề xuất', 'Vi phạm & đề xuất kỷ luật'].map((h) => el('th', null, h)))),
+      el('tbody', null, rows.map((r, i) => el('tr', { class: r.st.grade === 'D' || r.dc.lv >= 2 ? 'late' : '', onclick: () => { ST.profile = r.s.id; rTasks(); } },
+        el('td', null, r.st.score == null ? '—' : '#' + (i + 1)), el('td', null, el('b', null, r.s.name), el('small', { style: 'display:block;color:var(--muted)' }, r.s.pos)), el('td', null, r.st.n), el('td', null, r.st.done), el('td', null, r.st.late), el('td', null, r.st.fail),
+        el('td', null, r.st.avg == null ? '—' : r.st.avg.toFixed(1)), el('td', null, r.st.rate == null ? '—' : Math.round(r.st.rate * 100) + '%'), el('td', null, el('b', null, r.st.score ?? '—')), el('td', null, gradeEl(r.st.grade)), el('td', null, rec(r.st)),
+        el('td', null, r.dc.lv ? el('span', { class: 'tk-rec ' + (r.dc.lv >= 2 ? 'bad' : 'warn') }, `${r.dc.c90} lần trễ không báo trong 90 ngày → ${r.dc.text}`) : el('span', { class: 'tk-rec' }, 'Không có'))))))));
+    body.append(el('p', { class: 'tk-note' }, el('b', null, 'Cách tính: '), 'Điểm kỳ = 70% × điểm chất lượng trung bình (thang 10, quy ra 100) + 30% × tỉ lệ nộp đúng hạn. Xếp loại A ≥ 85 · B 70–84 · C 55–69 · D < 55. ',
+      el('b', null, 'Đề xuất kỷ luật '), 'chỉ dựa trên hành vi "trễ hạn mà không xin gia hạn trước", theo thang ở mục 6 Quy chế giao việc. Điểm thấp không phải vi phạm kỷ luật: xử lý bằng kèm cặp và kế hoạch cải thiện. Giám đốc là người quyết định cuối cùng; tuyệt đối không phạt tiền. Nhấn vào một dòng để mở hồ sơ đánh giá.'));
+  }
+  function profile(body, id) {
+    const s = P(id), dir = can('t:review');
+    if (!can('t:rank') && id !== ST.me) return;
+    if (can('t:rank')) body.append(el('button', { class: 'tk-btn ghost sm', onclick: () => { ST.profile = null; ST.sub = 'rank'; rTasks(); } }, '‹ Về bảng xếp hạng'));
+    body.append(el('h3', { style: 'margin:10px 0 2px' }, `Hồ sơ đánh giá – ${s.name}`), el('p', { class: 'sub' }, s.pos));
+    body.append(el('div', { class: 'tk-ptiles' }, [['week', 'Tuần này'], ['month', 'Tháng này'], ['quarter', 'Quý này']].map(([k, l]) => { const st = stats(id, k); return el('div', { class: 'tk-ptile' }, el('div', { class: 'tk-demo' }, l), el('div', { class: 'v' }, st.score ?? '—', ' ', gradeEl(st.grade)), el('div', { style: 'font-size:12px;color:var(--muted)' }, `${st.done}/${st.n} việc hoàn thành · ${st.late} trễ hạn`), rec(st)); })));
+    const dc = disc(id);
+    body.append(el('div', { class: 'tk-sec', style: dc.lv >= 2 ? 'background:#fff1f3' : '' }, el('h4', null, 'Vi phạm (trễ hạn không xin gia hạn trước)'), el('p', { style: 'margin:0;font-size:13px' }, `${dc.c90} lần trong 90 ngày · ${dc.c180} lần trong 180 ngày. `, el('b', null, dc.text))));
+    // nhận xét của giám đốc
+    const per = [['week', 'Tuần này'], ['month', 'Tháng này'], ['quarter', 'Quý này']];
+    body.append(el('div', { class: 'tk-sec' }, el('h4', null, 'Nhận xét của Giám đốc Marketing'), per.map(([k, l]) => {
+      const key = id + '|' + k, cur = D.comments[key] || '';
+      if (!dir) return el('p', { style: 'font-size:13px;margin:6px 0' }, el('b', null, l + ': '), cur || 'Chưa có nhận xét');
+      const ta = el('textarea', { value: cur, placeholder: `Nhận xét ${l.toLowerCase()}…`, style: 'width:100%;min-height:50px' });
+      return el('div', { style: 'margin-bottom:10px' }, el('div', { style: 'font-size:12px;font-weight:600;margin-bottom:4px' }, l), ta, el('button', { class: 'tk-btn ghost sm', style: 'margin-top:6px', onclick: () => api('comment', { staff: id, period: k, text: ta.value.trim() }) }, 'Lưu nhận xét'));
+    })));
+    const rv = D.tasks.filter((t) => t.owner === id && t.review).sort((a, b) => b.review.at - a.review.at);
+    body.append(el('div', { class: 'tk-sec' }, el('h4', null, 'Các việc đã được chấm'), rv.length ? el('div', { class: 'tw' }, el('table', { class: 'tk-table' }, el('thead', null, el('tr', null, ['Mã', 'Tên việc', 'Hạn chót', 'Nộp lúc', 'Kết quả', 'Điểm', 'Feedback'].map((h) => el('th', null, h)))),
+      el('tbody', null, rv.map((t) => el('tr', { onclick: () => detail(t.id) }, el('td', null, t.code), el('td', null, t.title), el('td', null, fdt(t.due)), el('td', { style: t.submittedAt > t.due ? 'color:#b5233a;font-weight:600' : '' }, fdt(t.submittedAt)), el('td', null, t.review.result), el('td', null, el('b', null, t.review.score)), el('td', null, t.review.feedback)))))) : el('p', { class: 'sub' }, 'Chưa có việc nào được chấm.')));
+  }
+
+
+  function recurPage(body) {
+    body.append(el('h3', { style: 'margin:0 0 4px' }, 'Việc lặp lại'), el('p', { class: 'sub' }, 'Hệ thống tự tạo việc trước 7 ngày và gửi thông báo cho người làm. Tạo việc lặp lại bằng nút "Giao việc mới" → mục Lặp lại.'));
+    const DOW = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+    body.append(el('div', { class: 'tw' }, el('table', { class: 'tk-table' }, el('thead', null, el('tr', null, ['Tên việc', 'Người làm', 'Lịch', 'Ưu tiên', ''].map((h) => el('th', null, h)))),
+      el('tbody', null, D.recur.filter((r) => r.active).map((r) => el('tr', { style: 'cursor:default' }, el('td', null, el('b', null, r.title)), el('td', null, P(r.owner).name), el('td', null, r.freq === 'weekly' ? `Hằng tuần · ${DOW[r.dow]} ${pad(r.hh)}:00` : `Hằng tháng · ngày ${r.dom} lúc ${pad(r.hh)}:00`), el('td', null, r.priority),
+        el('td', null, el('button', { class: 'tk-btn ghost sm', onclick: () => api('recurStop', { id: r.id }) }, 'Dừng lặp'))))))));
+  }
+  function logPage(body) {
+    body.append(el('h3', { style: 'margin:0 0 4px' }, 'Lịch sử thay đổi'), el('p', { class: 'sub' }, 'Ghi lại ai làm gì, lúc nào. Không ai sửa hay xóa được – dùng làm căn cứ khi đánh giá và xử lý vi phạm.'));
+    body.append(el('div', { class: 'tw' }, el('table', { class: 'tk-table' }, el('thead', null, el('tr', null, ['Thời gian', 'Người thực hiện', 'Mã việc', 'Hành động', 'Chi tiết'].map((h) => el('th', null, h)))),
+      el('tbody', null, D.log.map((l) => el('tr', { style: 'cursor:default' }, el('td', null, fdt(l.at)), el('td', null, l.by), el('td', null, l.code), el('td', null, el('b', null, l.action)), el('td', null, l.detail)))))));
+  }
+  function notiPage(body) {
+    const ns = can('t:staff') ? D.noti : D.noti.filter((n) => n.to === ST.me);
+    body.append(el('h3', { style: 'margin:0 0 4px' }, can('t:staff') ? 'Thông báo đã gửi' : 'Thông báo của tôi'), el('p', { class: 'sub' }, 'Thông báo cũng được gửi qua email khi: được giao việc, sắp đến hạn, trễ hạn, gửi duyệt, xin/duyệt gia hạn, được chấm điểm. Zalo sẽ bổ sung khi công ty có Zalo Official Account.'));
+    body.append(el('ul', { class: 'tk-list tk-noti' }, ns.length ? ns.slice(0, 80).map((n) => el('li', null, el('span', { class: 'tk-zalo' }, '✉'), el('div', null, el('small', null, `${fdt(n.at)} · gửi ${P(n.to).name}`), el('div', null, n.text)))) : el('li', null, 'Chưa có thông báo')));
+  }
+
+
+  // ---------- Đăng nhập ----------
+  const AU = { screen: 'login', msg: '', err: '', email: '', token: null, info: null };
+  const post = async (u, b) => { const r = await fetch(u, { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b || {}) }); const j = await r.json().catch(() => ({ error: 'Máy chủ không phản hồi (HTTP ' + r.status + ')' })); return { ok: r.ok && !j.error, j }; };
+  function authShow(screen, o) { Object.assign(AU, { screen, err: '', msg: '' }, o || {}); renderAuth(); }
+  function showLogin(msg) { ME = null; closeModal(); try { loader('done'); } catch (e) {} authShow('login', { msg: msg || '' }); }
+  function renderAuth() {
+    let ov = document.getElementById('tk-auth');
+    if (AU.screen === 'off') { if (ov) ov.remove(); return; }
+    if (!ov) { ov = el('div', { id: 'tk-auth', class: 'tk-auth' }); document.body.append(ov); }
+    ov.replaceChildren();
+    const card = el('div', { class: 'tk-acard' }, el('div', { class: 'tk-abrand' }, el('div', { class: 'logo' }, 'HPR'), el('div', null, el('b', null, 'HPR Performance'), el('small', null, 'Marketing & Sales'))));
+    const err = AU.err && el('div', { class: 'tk-aerr' }, AU.err), msg = AU.msg && el('div', { class: 'tk-amsg' }, AU.msg);
+    const field = (label, input) => el('label', { class: 'tk-afield' }, label, input);
+    const wait = (b) => { b.disabled = true; b.textContent = 'Đang xử lý…'; };
+    if (AU.screen === 'login') {
+      const em = el('input', { type: 'email', value: AU.email, placeholder: 'ten@gmail.com', autocomplete: 'username' }), pw = el('input', { type: 'password', placeholder: 'Mật khẩu', autocomplete: 'current-password' });
+      const btn = el('button', { class: 'tk-btn tk-cta tk-awide' }, 'Đăng nhập');
+      const go = async () => { if (!em.value.trim() || !pw.value) return authShow('login', { email: em.value, err: 'Nhập Gmail và mật khẩu.' }); wait(btn); const r = await post('/api/auth/login', { email: em.value, password: pw.value }); if (!r.ok) return authShow('login', { email: em.value, err: r.j.error }); authShow('off'); TKboot(); };
+      btn.onclick = go; pw.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
+      card.append(el('h2', null, 'Đăng nhập'), el('p', { class: 'tk-asub' }, 'Dùng Gmail đã được Giám đốc Marketing mời.'), msg, err, field('Gmail', em), field('Mật khẩu', pw), btn,
+        el('button', { class: 'tk-alink', onclick: () => authShow('forgot', { email: em.value }) }, 'Quên mật khẩu?'));
+      setTimeout(() => (AU.email ? pw : em).focus(), 30);
+    } else if (AU.screen === 'forgot') {
+      const em = el('input', { type: 'email', value: AU.email, placeholder: 'ten@gmail.com' }), btn = el('button', { class: 'tk-btn tk-cta tk-awide' }, 'Gửi link đặt lại mật khẩu');
+      btn.onclick = async () => { if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())) return authShow('forgot', { email: em.value, err: 'Gmail không hợp lệ.' }); wait(btn); const r = await post('/api/auth/forgot', { email: em.value }); authShow('forgot', { email: em.value, msg: r.ok ? r.j.msg : '', err: r.ok ? '' : r.j.error }); };
+      card.append(el('h2', null, 'Quên mật khẩu'), el('p', { class: 'tk-asub' }, 'Nhập Gmail đăng nhập. Nếu Gmail có trong hệ thống, link đặt lại mật khẩu sẽ được gửi tới hộp thư (hết hạn sau 48 giờ).'), msg, err, field('Gmail', em), btn,
+        el('button', { class: 'tk-alink', onclick: () => authShow('login', { email: em.value }) }, '‹ Quay lại đăng nhập'));
+    } else if (AU.screen === 'setpw') {
+      if (!AU.info) {
+        card.append(el('h2', null, 'Link không còn hiệu lực'), el('p', { class: 'tk-asub' }, AU.err || 'Link đã được dùng, đã hết hạn, hoặc tài khoản đã bị khóa. Liên hệ Giám đốc Marketing để được gửi lại lời mời.'), el('button', { class: 'tk-alink', onclick: () => authShow('login') }, '‹ Về trang đăng nhập'));
+      } else {
+        const p1 = el('input', { type: 'password', placeholder: 'Mật khẩu mới', autocomplete: 'new-password' }), p2 = el('input', { type: 'password', placeholder: 'Nhập lại mật khẩu', autocomplete: 'new-password' });
+        const rules = [['Ít nhất 8 ký tự', (v) => v.length >= 8], ['Có chữ cái', (v) => /[A-Za-zÀ-ỹ]/.test(v)], ['Có chữ số', (v) => /\d/.test(v)]];
+        const rl = el('ul', { class: 'tk-rules' }), upd = () => { rl.replaceChildren(...rules.map(([l, f]) => el('li', { class: f(p1.value) ? 'ok' : '' }, (f(p1.value) ? '✓ ' : '• ') + l))); };
+        p1.addEventListener('input', upd); upd();
+        const btn = el('button', { class: 'tk-btn tk-cta tk-awide' }, 'Lưu mật khẩu');
+        btn.onclick = async () => {
+          if (!rules.every(([, f]) => f(p1.value))) return authShow('setpw', { token: AU.token, info: AU.info, err: 'Mật khẩu chưa đạt yêu cầu.' });
+          if (p1.value !== p2.value) return authShow('setpw', { token: AU.token, info: AU.info, err: 'Hai lần nhập mật khẩu không khớp.' });
+          wait(btn); const r = await post('/api/auth/setpw', { token: AU.token, password: p1.value });
+          if (!r.ok) return authShow('setpw', { token: AU.token, info: AU.info, err: r.j.error });
+          authShow('login', { email: r.j.email, msg: r.j.first ? 'Đã tạo mật khẩu. Đăng nhập bằng Gmail và mật khẩu vừa tạo.' : 'Đã đặt lại mật khẩu. Hãy đăng nhập lại.' });
+        };
+        card.append(el('h2', null, AU.info.type === 'invite' ? 'Tạo mật khẩu' : 'Đặt lại mật khẩu'), el('p', { class: 'tk-asub' }, `Tài khoản: ${AU.info.name} – ${AU.info.email}`), err,
+          field('Mật khẩu mới', p1), rl, field('Nhập lại mật khẩu', p2), btn);
+      }
+    }
+    ov.append(card);
+  }
+  async function openSetpw(token) { try { loader('done'); } catch (e) {} const r = await post('/api/auth/check', { token }); authShow('setpw', { token, info: r.ok ? r.j : null, err: r.ok ? '' : r.j.error }); }
+  async function logout() { await post('/api/auth/logout'); location.hash = ''; location.reload(); }
+  function applyPerms() {
+    document.querySelectorAll('.side .nav').forEach((b) => { b.style.display = b.dataset.tab === 'tasks' || can('tab:' + b.dataset.tab) ? '' : 'none'; });
+    document.querySelectorAll('.side .navh').forEach((h) => { let n = h.nextElementSibling, any = false; while (n && !n.classList.contains('navh')) { if (n.classList.contains('nav') && n.style.display !== 'none') any = true; n = n.nextElementSibling; } h.style.display = any ? '' : 'none'; });
+    document.body.classList.toggle('tk-nophone', !can('phone'));
+    const me = document.querySelector('.top .me div'); if (me && ME) me.firstChild.textContent = ME.name;
+  }
+  const TABS = ['overview', 'campaign', 'content', 'time', 'customer', 'meet', 'team', 'health'];
+  async function TKboot() {
+    const m = (location.hash || '').match(/^#setpw=([A-Za-z0-9_-]{20,})/);
+    if (m) { history.replaceState(null, '', location.pathname); return openSetpw(m[1]); }
+    loader('loading', 'Đang tải', 'Kiểm tra đăng nhập…');
+    try { await loadState(); } catch (e) { if (e.auth) return showLogin(); return loader('error', 'Không tải được dữ liệu', e.message + '. Anh thử tải lại trang sau ít phút.'); }
+    const allowed = TABS.filter((k) => can('tab:' + k));
+    let j = { updatedAt: new Date().toISOString(), ads: [], sales: [], customers: [], warnings: [], restricted: true };
+    let dataErr = '';
+    if (allowed.length) { loader('loading', 'Đang tải dữ liệu', 'Đọc dữ liệu Meta Ads và Google Sheet…'); try { j = await getJSON('/api/data'); } catch (e) { dataErr = e.message; } }
+    S.restricted = !allowed.length; prepare(j); loader('done'); authShow('off'); applyPerms();
+    const h = (location.hash || '').slice(1); S.tab = h === 'tasks' || allowed.includes(h) ? h : allowed[0] || 'tasks';
+    setPreset('month'); openTab(S.tab);
+    if (dataErr) { openTab('tasks'); toast('⚠ Chưa tải được số liệu marketing: ' + dataErr); }
+  }
+
+  // ---------- Gắn vào dashboard ----------
+  Object.keys(R).forEach((k) => { const f = R[k]; R[k] = () => { const fl = document.getElementById('filters'); if (fl) fl.style.display = ''; f(); }; });
+  R.tasks = rTasks; TITLES.tasks = 'Giao việc & đánh giá';
+  const _openTab = openTab;
+  openTab = (t) => { if (ME && t !== 'tasks' && !can('tab:' + t)) t = 'tasks'; _openTab(t); };
+  setInterval(async () => { if (ME && S.tab === 'tasks' && !document.getElementById('tk-modal') && document.visibilityState === 'visible' && !busy) { try { await loadState(); applyPerms(); rTasks(); } catch (e) { if (e.auth) showLogin('Phiên đăng nhập đã hết, vui lòng đăng nhập lại.'); } } }, 60000);
+  return { boot: TKboot };
+
+})();
+
 const loader = (state, title, msg) => { $('#loader').classList.toggle('hide', state === 'done'); $('#ld-spin').classList.toggle('hide', state !== 'loading'); if (title) $('#ld-t').textContent = title; if (msg) $('#ld-p').textContent = msg; };
 const getJSON = async (u) => { const r = await fetch(u, { credentials: 'same-origin', cache: 'no-store' }); const j = await r.json().catch(() => ({ error: 'HTTP ' + r.status })); if (!r.ok || j.error) throw new Error(j.error || 'HTTP ' + r.status); return j; };
 function tickUpdated() {
@@ -1036,7 +1679,7 @@ function tickUpdated() {
   el.title = 'Dữ liệu dựng lúc ' + t.toLocaleString('vi-VN') + '. Trang tự làm mới mỗi 60 giây.';
 }
 async function silentRefresh(fresh) {
-  if (!S.raw || S.refreshing || S.snapshot) return;
+  if (!S.raw || S.refreshing || S.snapshot || S.restricted) return;
   S.refreshing = true; tickUpdated();
   try { const j = await getJSON('/api/data' + (fresh ? '?fresh=1' : '')); if (j.updatedAt && (fresh || j.updatedAt !== S.updatedAt)) { const keepTo = S.to === S.maxDate; prepare(j); if (keepTo) S.to = S.maxDate; render(); } } catch (e) { /* giữ số cũ */ }
   S.refreshing = false; tickUpdated();
@@ -1050,10 +1693,10 @@ async function boot() {
     setPreset('month'); openTab(S.tab);
   } catch (e) { loader('error', 'Không tải được dữ liệu', e.message + '. Anh thử tải lại trang sau ít phút.'); }
 }
-$('#refresh').onclick = () => (S.raw ? silentRefresh(true) : boot());
+$('#refresh').onclick = () => (S.raw ? silentRefresh(true) : TK.boot());
 setInterval(() => { if (document.visibilityState === 'visible') silentRefresh(false); }, 60000);
 setInterval(tickUpdated, 15000);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') silentRefresh(false); });
-boot();
+TK.boot();
 })();
 </script></body></html>
